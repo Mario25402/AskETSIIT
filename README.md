@@ -12,9 +12,15 @@ Es muy común ver a gente, en cualquier altura del curso, preguntar acerca de:
 
 Información que se encuentra escondida bajo muchos enlaces o documentos en páginas confusas y que hacen dificultosa la aclaración de las dudas y la consulta constante de las mismas.
 
+## Historias de Usuario
+[Link](./docs/HUs.md)
+
+## Milestones
+[Link](./docs/MSs.md)
+
 ## Extra
 
 [Licencia](./LICENSE)
 [Configuración](./conf/pasos.txt)
 [Checkeo de claves](./conf/claves.png)
-[Fuentes](./fuentes.md)
+[Fuentes](./docs/fuentes.md)
