@@ -1,19 +1,7 @@
 # User Stories
 
-## HU-1: Estructura - Milestone 1
-Como desarrollador sé que los datos deben estar estructurados correctamente para que su posterior acceso, sea fácil y rápido
+## HU-1:
+Soy Jorge, un alumno de primer curso y me encuentro perdido, cuando intento buscar las asignaciones de aulas, no soy capaz de aclararme ya que existen demasiadas páginas y hay enlaces que te llevan a sitios erroneos, otros que no funcionan, documentos que actualizan cada día o cambian de lugar. Agradecería poder saber de manera sencilla en que aulas tengo clase sin tener que estar perdiendo el tiempo continuamente.
 
-## HU-2: Datos y Relaciones - Milestone 1
-Como desarrollador debo conocer que datos se van a usar y cómo están relacionados
-
-## HU-3: Navegación - Milestone 2
-Como desarrollador debo navegar entre las páginas hasta dar con enlaces o documentos
-
-## HU-4: Evaluación de contenido - Milestone 2
-Como desarrollador debo ser capaz de extraer información de las fuentes, es decir, ver que sí y que no es importante
-
-## HU-5: Uso común - Milestone 3
-Como usuario quiero poder acceder a información basandome en diferentes referencias (profesor, aula o asignatura)
-
-## HU-6: Notificaciones - Milestone 3
-Como usuario quiero que se me informe acerca de asignaturas de las que estoy matriculado
+## HU-2:
+Me llamo Mario y con suerte acabo este año el grado de Ingeniería Informática, lo único que me falta es encontrar un tutor para mi TFG. Como no sé sobre que realizarlo, estoy echando memoria para recordar qué asignaturas me gustaron más para ver si el profesor que la imparte tuviera disponibilidad para ella, el problema es que después de casi 4 años no me acuerdo de los profesores que tuve y mucho menos de su correo por lo que me gustaría poder acceder a ellos facilmente.
