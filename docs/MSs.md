@@ -1,9 +1,9 @@
 # MileStones
 
 ## Milestone 0: Modelo Inicial 
-- Objetivo: Procesar el problema para empezar a modelar la solución, teniendo en cuenta las relaciones entre los datos.
-- Entregable: Modelo/Estructura de los datos del problema.
-- Viabilidad: Modelo simple, eficiente y eficaz.
+- Objetivo: Procesar el problema para empezar a modelar la solución, estudiar que informaciòn se va a manejar y decidir como se va a trabajar con ella, teniendo en cuenta las relaciones entre los datos y los problemas descritos en las HUs.
+- Entregable: Modelo/Estructura de los datos del problema, un diseño relacional de una base de datos o el método de almacenamiento seleccionado en el que se vea con claridad que la información está unificada y es usable, es decir, que se pueda consultar de diferentes formas y que sigan siendo los mismos resultados (por ejemplo, consultado un una asignatura sabiendo la clase o el profesor).
+- Viabilidad: Modelo simple, eficiente y eficaz, también debe ser un sistema robusto ya que no se actualizará con demasiada frecuencia por lo que debe dar un servicio fiable.
 
 ## Milestone 1: Extracción de las fuentes
 - Objetivo: Leer los diferentes formatos de documentos o de páignas web que contendran los datos.
