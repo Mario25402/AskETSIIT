@@ -10,6 +10,7 @@
 - Entregable: Código que lea las fuentes.
 - Viabilidad: Cumplimentación de los test.
 - Producto: Programa capaz de extraer la documentación útil, los usuarios pueden investigarla para sus consultas si desean aunque este producto es parte de uno mayor desglosado.
+- Ambito: interno.
 
 ## Milestone 2: Procesamiento de las información 
  - Objetivo: Una vez leidas las fuentes hay que buscar y detectar dentro la información relevante y clasificarla.
