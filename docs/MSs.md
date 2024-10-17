@@ -6,7 +6,7 @@
 - Viabilidad: Código simple que engoble la totalidad de los datos para que se trabajen con ellos de manera eficiente, deben estar consensuados y conformes todas las partes que toman parte en el proyecto.
 
 ## Milestone 1: Extracción de las fuentes
-- Objetivo: Leer los diferentes formatos de documentos o de páignas web que contendran los datos.
+- Objetivo: Leer los diferentes formatos de documentos o de páginas web que contendran los datos.
 - Entregable: Código que lea las fuentes, esto significa que explore los diferentes enlaces, documentos o páginas distribuidos con el fin de localizar dónde se puede encontrar información aprovechable.
 - Viabilidad: Cumplimentación de los test que evaluarán si se consigue obtener fuentes de datos aisladas.
 - Producto: Programa capaz de extraer la documentación útil, los usuarios pueden investigarla para sus consultas si desean aunque este producto es parte de uno mayor desglosado.
