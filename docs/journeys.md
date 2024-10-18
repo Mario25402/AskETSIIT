@@ -1,7 +1,7 @@
 # User Journeys
 
-## Carla
-- Contexto: Es una estudiante de doble grado con matemáticas y tiene clase tanto en la facultad de Ciencias como en la ETSIIT, debido a esto, no consigue recordar en que aulas tiene cada asignatura.
+## Jorge
+- Contexto: Es una estudiante del primer curso doble grado con matemáticas y tiene clase tanto en la facultad de Ciencias como en la ETSIIT, debido a esto, no consigue recordar en que aulas tiene cada asignatura.
 - Pasos: Buscar en las diferentes paginas de la universidad la web de la facultad, seguidamente, buscar en la zona de estudiantado el grado de informática, entrar al PDF de horarios y buscar en las 20 páginas
 su curso, el día, la asignatura y por último ver en que aula corresponde.
 - Frecuencia de uso: Diaria
