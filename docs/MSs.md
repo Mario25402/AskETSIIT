@@ -1,9 +1,10 @@
 # MileStones
 
-## Milestone 0: Estudio y planteamiento de las bases 
-- Procesar y enteder el problema para empezar a modelar y cimentar las bases de la solución, estudiar que informaciòn se va a manejar y decidir como se va a trabajar con ella.
-- Entregable: Código que establezca el dominio del problema, una base con la que el programa trabajará.
-- Viabilidad: El código ha de englobar los datos en un lenguaje consensuado en el que se propondrá una estructura que será usada en un futuro, por ello, se deben seguir buenas prácticas en la programación y estar escrito de forma clara.
+## Milestone 0: Modelo inicial
+- Ver las [historias de usuario](HUs.md) para familiarizarse con el problema y programar la estructura en la que se manejarán los datos.
+- Entregable: Archivo/s de código que implemente/n la estructura inicial de la aplicación.
+- Código que establezca el dominio del problema, una base con la que el programa trabajará.
+- Viabilidad: Buenas prácticas en el código para el lenguaje elegido. La estructura podrá contener la información usada en el proyecto.
 
 ## Milestone 1: Extracción de las fuentes
 - Leer los diferentes formatos de documentos o de páginas web que contendran los datos.
