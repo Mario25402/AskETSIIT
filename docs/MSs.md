@@ -3,7 +3,6 @@
 ## Milestone 0: Modelo inicial
 - Ver las [historias de usuario](HUs.md) para familiarizarse con el problema y programar la estructura en la que se manejarán los datos.
 - Entregable: Archivo/s de código que implemente/n la estructura inicial de la aplicación.
-- Código que establezca el dominio del problema, una base con la que el programa trabajará.
 - Viabilidad: Buenas prácticas en el código para el lenguaje elegido. La estructura podrá contener la información usada en el proyecto.
 
 ## Milestone 1: Extracción de las fuentes
