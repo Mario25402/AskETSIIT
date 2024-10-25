@@ -1,8 +1,8 @@
 # MileStones
 
 ## Milestone 0: Modelo inicial
-- Programar la estructura en la que se manejarán los datos del problema (principalmente acceder de manera sencilla a información que será reprocesada para que esté disponible a los usuarios de forma interactiva). La información con la que se trabaja tratará sobre asignaturas, horas, profesorado, estudiantado, aulas...
-- Entregable: Archivo/s de código que implemente/n la estructura inicial de la aplicación, ésto es el conjunto de clases y variables que se completarán posteriormente con el fin de englobar todo el código del proyecto
+- Programar la estructura en la que se manejarán los datos del problema descrito en las historias de usuario 1 y 2. La información con la que se trabaja tratará sobre asignaturas, horas, profesorado, estudiantado, aulas...
+- Entregable: Archivo/s de código que implemente/n la estructura inicial de la aplicación, ésto es el conjunto de clases y variables que se completarán posteriormente con el fin de englobar todo el código del proyecto.
 - Viabilidad: Buenas prácticas en el código para el lenguaje elegido. La estructura podrá contener la información usada en el proyecto.
 - Ambito: interno.
 
