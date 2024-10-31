@@ -1,7 +1,7 @@
 # User Journeys
 
 ## Contexto: 
-Una serie de delegados de clase ha reunido las diferentes quejas que obtiene de sus compañeros de clase respecto a la dificultad de encontrar información en relación a distintos ámbitos.
+Una serie de delegados de clase ha reunido las diferentes quejas que obtiene de sus compañeros de clase respecto a la dificultad de encontrar información en relación a distintos ámbitos, les gustaría que fueran mejoradas o que hubiera alguna solución más accesible e interactiva.
 
 ## Pasos:
 1. Buscar en las diferentes paginas de la universidad, la web de la facultad.
