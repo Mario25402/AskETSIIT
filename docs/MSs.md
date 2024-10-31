@@ -7,8 +7,8 @@
 - Ámbito: interno.
 
 ## Milestone 1: Lógica de negocio
-- Utilizando el modelo creado anteriormente y las fuentes de información, se quiere solventar o facilitar los pasos mencionados en el UJ de la HU 1.
-- Entregable: Código que complete el modelo con los datos ubicados en las fuentes.
-- Viabilidad: El programa pasa los test que evaluarán si los datos son usables (que no sean erroneos o inutilizables).
+- Utilizando el modelo creado anteriormente y las fuentes de información, se tiene que facilitar el proceso de la actual resolución al problema descrito en la HU 1.
+- Entregable: Código que implemente una solución al problema de la información distribuida en relación a los datos de la HU 1.
+- Viabilidad: El programa pasa los test que evaluarán si los datos extraidos son usables (que no sean erroneos o inutilizables).
 - Producto: Programa con información estructurada susceptible de ser consultada por el cliente.
 - Ámbito: interno.
