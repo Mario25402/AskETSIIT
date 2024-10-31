@@ -9,6 +9,6 @@
 ## Milestone 1: Lógica de negocio
 - Utilizando el modelo creado anteriormente y las fuentes de información, se tiene que facilitar el proceso de la actual resolución al problema descrito en la HU 1.
 - Entregable: Código que implemente una solución al problema de la información distribuida en relación a los datos de la HU 1.
-- Viabilidad: El programa pasa los test que evaluarán si los datos extraidos son usables (que no sean erroneos o inutilizables).
+- Viabilidad: Este milestone será válido cuando se tengan en el modelo los datos requeridos para las preguntas frecuentes referidas en la historia de usuario.
 - Producto: Programa con información estructurada susceptible de ser consultada por el cliente.
 - Ámbito: interno.
