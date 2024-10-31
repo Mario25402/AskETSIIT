@@ -1,8 +1,8 @@
 # Milestones
 
 ## Milestone 0: Modelo inicial
-- Los datos del problema descrito en la historia de usuario 1 se ha poder trabajar en código, por ello se debe modelizar un punto de partida para poder trabajar.
-- Entregable: Modelo del problema en código que implemente las estructuras de datos, variables y funciones auxiliares (si fueran necesarias).
+- Los datos del problema descritos en la historia de usuario 1 se han poder trabajar en código, por ello se debe modelizar un punto de partida para poder trabajar.
+- Entregable: Archivos que contengan el modelo. Un modelo es código que implementa las estructuras de datos, variables y funciones auxiliares (si fueran necesarias).
 - Viabilidad: Buenas prácticas en el código para el lenguaje elegido. El modelo puede ser utilizado para crear, almacenar, consultar y borrar datos correctamente.
 - Ámbito: interno.
 
