@@ -11,10 +11,6 @@ type Periodo struct {
 	HoraFin    time.Time
 }
 
-func (p Periodo) String() string {
-	return fmt.Sprintf("%s-%s", p.HoraInicio.Format("15:04"), p.HoraFin.Format("15:04"))
-}
-
 func esHoraValida(hora time.Time) bool {
 	return hora.Minute() == 0 || hora.Minute() == 30
 }
