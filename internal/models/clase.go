@@ -2,7 +2,6 @@ package models
 
 import (
 	DiaSemana "askETSIIT/internal/diasemana"
-	"fmt"
 )
 
 type Clase struct {
@@ -10,8 +9,4 @@ type Clase struct {
 	Periodo *Periodo
 	Aula    string
 	Grupo   Grupo
-}
-
-func (c Clase) String() string {
-	return fmt.Sprintf("- %s %s:  %s (%s)", c.Dia, c.Periodo, c.Grupo.Asignatura, c.Aula)
 }
