@@ -17,7 +17,7 @@ Ejecutando una orden, el fichero se actualizará con las dependencias creando ad
 
 ## Configuración manual
 
-Existe la posibilidad de gestionar manualmente las dependencias, a través de la carpeta *"vendor"*, la cuál contendrá el código fuente de los paquetes utilizados.
+Existe la posibilidad de gestionar manualmente las dependencias, a través de la carpeta *"vendor"*, la cuál no funciona como un gestor sino que la gestión se hace de forma explicita por la/s persona/s encargada/s. Ésta contendrá el código fuente de los paquetes utilizados.
 
 Algunas de las ventajas que ofrece éste método es la posibilidad de programar de manera *offline* (en caso de tener las dependencias descargadas), buscar una versión específica, acelera la compilación sobretodo en entornos de trabajo en equipo.
 
