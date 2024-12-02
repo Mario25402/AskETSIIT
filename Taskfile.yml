@@ -1,0 +1,13 @@
+version: '3'
+
+tasks:
+  installdeps:
+    desc: Instala las dependencias necesarias
+    cmds:
+      - go mod tidy
+
+  check:
+    desc: Comprueba la sintaxis de los archivos fuente
+    cmds:
+      - go vet ./...
+
