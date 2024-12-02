@@ -2,10 +2,9 @@
 ## Requisitos de aceptación:
 
 - Deuda técnica.
+- Versatilidad.
 - Soporte y comunidad activa.
-- Versatilidad e integración con el lenguaje.
 - Características y funcionalidades.
-- Seguridad y velocidad.
 
 ## Comparativa
 ### Mage
