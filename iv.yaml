@@ -1,0 +1,7 @@
+lenguage: Go
+entidad:
+  - internal/models/clase.go
+  
+automatizar:
+  - fichero: Taskfile.yml
+    - orden: task check
