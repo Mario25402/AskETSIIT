@@ -10,9 +10,9 @@
 ### Mage
 	- Mage es una herramienta escrita y diseñada para Go.
 	- Permite la definición de tareas con el propio lenguaje.
-	- Deuda técnica baja ya que es intuitiva para desarrolladores familiarizados con Go.
 	- Es escalable gracias a su integración directa con el lenguaje.
 	- Rápida por no tener que interpretar archivos externos.
+ 	- La última versión se lanzó hace tiempo, por lo que es posible que nos encontremos con problemas.
 	- Recomendado para proyectos exclusivos de Go.
 
 ### Task
