@@ -1,10 +1,10 @@
 # Gestores de Tareas
 ## Requisitos de aceptación:
 
-- Deuda técnica.
-- Versatilidad.
-- Soporte y comunidad activa.
-- Características y funcionalidades.
+- **Deuda técnica:** impacto que tiene una herramienta a lo largo del tiempo, en relación al aprendizaje, dificultad de  integración, uso, etc...
+- **Versatilidad:** capacidad para adaptarse a difentes proyectos, entornos y lenguajes.
+- **Soporte y comunidad activa:** versiones, recursos y documentación actualizada.
+- **Características y funcionalidades:** rasgos y capacidades que diferencian una herramienta de otra.
 
 ## Comparativa
 ### Mage
@@ -46,6 +46,6 @@
 
 El criterio de la deuda técnica es muy importante ya que no queremos que conforme avance el proyecto nos vayamos poniendo más "piedras en el camino" por lo que descartaremos *Make*.
 
-De entre los demás tampoco utilizaremos *Mage* porque aunque está mejor integrado, no es común que los proyectos tenga exclusivamente un solo lenguaje.
+De entre los demás tampoco utilizaremos *Mage* porque aunque está mejor integrado, no es común que los proyectos tenga exclusivamente un solo lenguaje y se encuentra en proceso de obsolescencia.
 
 Entre los dos restantes, nos quedaremos con *Task* porque aunque ambos utilizan configuraciones en *"yml"* y *"yaml"*, *Task* permite definir tareas personalizadas de manera más simple que *GoReleaser*.
