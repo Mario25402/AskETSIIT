@@ -1,10 +1,8 @@
 # Gestores de Tareas
 ## Requisitos de aceptación:
 
-- **Deuda técnica:** impacto que tiene una herramienta a lo largo del tiempo, en relación al aprendizaje, dificultad de  integración, uso, etc...
-- **Versatilidad:** capacidad para adaptarse a difentes proyectos, entornos y lenguajes.
-- **Soporte y comunidad activa:** versiones, recursos y documentación actualizada.
-- **Características y funcionalidades:** rasgos y capacidades que diferencian una herramienta de otra.
+- **Madurez y robustez:** El nivel de desarrollo de la herramienta debe ser suficiente y debe seguir teniendo mantenimiento frecuente para maximizar la compatibilidad con el lenguaje y minimizar los errores.
+- **Adición de complejidad:** Se valorará la simplicidad de inclusión y uso del gestor, de manera que no aumente la dificultad del proyecto.
 
 ## Comparativa
 ### Mage
