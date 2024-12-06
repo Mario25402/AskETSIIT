@@ -4,46 +4,36 @@
 - **Madurez y robustez:** El nivel de desarrollo de la herramienta debe ser suficiente y debe seguir teniendo mantenimiento frecuente para maximizar la compatibilidad con el lenguaje y minimizar los errores.
 - **Adición de complejidad:** Se valorará la simplicidad de inclusión y uso del gestor, de manera que no aumente la dificultad del proyecto.
 
-## Comparativa
+## Opciones
 ### Mage
-	- Mage es una herramienta escrita y diseñada para Go.
-	- Permite la definición de tareas con el propio lenguaje.
-	- Es escalable gracias a su integración directa con el lenguaje.
-	- Rápida por no tener que interpretar archivos externos.
- 	- La última versión se lanzó hace tiempo, por lo que es posible que nos encontremos con problemas.
-	- Recomendado para proyectos exclusivos de Go.
+[Mage](https://magefile.org/) es una herramienta escrita en Go que permite definir tareas utilizando el propio lenguaje.
+
+1. Activa y mantenida, gracias a su integración directa en Go.
+2. La complejidad reside en la propia dificultad personal para el desarrollo de estos archivos en Go.
 
 ### Task
-	- Un gestor ligero y moderno que utiliza configuraciones en YAML.
-	- Facilita la ejecución paralela y las dependencias entre tareas.
-	- Deuda técina baja por su buen soporte y comunidad activa.
-	- Buen rendimiento para tareas en paralelo.
-	- Versátil e ideal para proyectos multilenguaje.
-	- Susceptible a errores en archivos de configuración.
-	- Recomendado para proyectos hibridos.
+[Task](https://taskfile.dev/) es un gestor que apuesta por la simplicidad y la versatilidad.
+
+1. Actualizaciones frecuentes, compatible con proyectos multilenguaje.
+2. Sintaxis sencilla por el uso de *YAML*.
 
 ### Make
-	- Task runner genérico y ampliamente utilizado, soporta el uso de Go.
-	- Permite definir reglas personalizadas.
-	- Deuda técnica media debido a su sintaxis y posible complejidad ante grandes proyectos.
-	- Versátil y portable.
-	- Más "rústico" que las otras opciones.
-	- Sin soporte para funciones complejas.
-	- Riesgos de seguridad al ejecutar comandos de shell.
-	- Recomendado para proyectos pequeños que busquen estabilidad.
 
-### GoReleaser
-	- Herramienta especializada para proyectos Go.
-	- Útil con tareas de despliegue continuo.
-	- Deuda técnica baja por su optimización con Go.
-	- Susceptible a errores en archivos de configuración.
-	- Menor flexibilidad en tareas genéricas.
-	- Recomendado para proyectos que requieren gestión automatizada de lanzamientos.
+[Make](https://www.gnu.org/software/make/) es una herramienta clásica de automatización integrable con todo tipo de lenguajes.
+
+1. Estable y fuertemente asentado. Mantenimiento escaso debido a su gran robustez.
+2. Integración secilla pero su sintaxis es menos moderna que las herramientas actuales.
+
+### Just
+[Just](https://just.systems/) es un gestor ligero similar a Mage pero más simplista.
+
+1. Desarrollo activo aunque menos utilizado que otras herramientas.
+2. Sintaxis limpia y ligera.
 
 ## Conclusión
+Aunque todas las opciones podrían ser consideradas en diferentes ámbitos debido a sus similitudes, vamos a ir nombrando a la que va a ser nuestra elección:
 
-El criterio de la deuda técnica es muy importante ya que no queremos que conforme avance el proyecto nos vayamos poniendo más "piedras en el camino" por lo que descartaremos *Make*.
-
-De entre los demás tampoco utilizaremos *Mage* porque aunque está mejor integrado, no es común que los proyectos tenga exclusivamente un solo lenguaje y se encuentra en proceso de obsolescencia.
-
-Entre los dos restantes, nos quedaremos con *Task* porque aunque ambos utilizan configuraciones en *"yml"* y *"yaml"*, *Task* permite definir tareas personalizadas de manera más simple que *GoReleaser*.
+- **Just**: Durante su instalación nos encontramos problemas con los repositorios y de dependecias externas.
+- **Make**: Aunque muy buena opción, es preferible usar herramientas más modernas.
+- **Mage**: Sintaxis un poco más compleja que otras opciones que aumentará la curva de aprendizaje.
+- **Task**: Gracias a la simple configuración con *YAML* consideramos ésta como nuestra elección.
