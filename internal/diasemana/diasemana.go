@@ -1,11 +1,11 @@
 package DiaSemana
 
-type DiaSemana string
+type DiaSemana int
 
 const (
-	Lunes     DiaSemana = "Lunes"
-	Martes    DiaSemana = "Martes"
-	Miercoles DiaSemana = "Miércoles"
-	Jueves    DiaSemana = "Jueves "
-	Viernes   DiaSemana = "Viernes"
+	Lunes DiaSemana = iota
+	Martes
+	Miercoles
+	Jueves
+	Viernes
 )
