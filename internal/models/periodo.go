@@ -2,35 +2,60 @@ package models
 
 import (
 	"errors"
-	"fmt"
-	"time"
+	"strconv"
+	"strings"
 )
 
+type HoraMinutos struct {
+	Hora    int // 0-23
+	Minutos int // 0-59
+}
+
+// NewHoraMinutosFromString toma una cadena "xx:yy" y devuelve un objeto HoraMinutos validado
+func NewHoraMinutosFromString(horaStr string) (*HoraMinutos, error) {
+	// Separar la cadena en horas y minutos
+	parts := strings.Split(horaStr, ":")
+	if len(parts) != 2 {
+		return nil, errors.New("el formato de la hora debe ser 'hh:mm'")
+	}
+
+	// Convertir las partes a enteros
+	hora, err := strconv.Atoi(parts[0])
+	if err != nil {
+		return nil, errors.New("la hora debe ser un número entero")
+	}
+
+	minuto, err := strconv.Atoi(parts[1])
+	if err != nil {
+		return nil, errors.New("los minutos deben ser un número entero")
+	}
+
+	// Usar la función NewHoraMinutos para validar y crear el objeto
+	return NewHoraMinutos(hora, minuto)
+}
+
+func NewHoraMinutos(hora, minutos int) (*HoraMinutos, error) {
+	if hora < 0 || hora > 23 {
+		return nil, errors.New("la hora debe estar entre 0 y 23")
+	}
+	if minutos != 0 && minutos != 30 {
+		return nil, errors.New("las horas deben ser a en punto o a y media")
+	}
+	return &HoraMinutos{Hora: hora, Minutos: minutos}, nil
+}
+
 type Periodo struct {
-	HoraInicio time.Time
-	HoraFin    time.Time
+	HoraInicio HoraMinutos
+	HoraFin    HoraMinutos
 }
 
-func esHoraValida(hora time.Time) bool {
-	return hora.Minute() == 0 || hora.Minute() == 30
+func esHoraValida(hora HoraMinutos) bool {
+	return hora.Minutos == 0 || hora.Minutos == 30
 }
 
-func NuevoPeriodo(horaInicioStr, horaFinStr string) (*Periodo, error) {
-	// Formato esperado "15:04" para horas en formato de 24 horas
-	const formato = "15:04"
-
-	horaInicio, err := time.Parse(formato, horaInicioStr)
-	if err != nil {
-		return nil, fmt.Errorf("error al parsear la hora de inicio: %v", err)
-	}
-
-	horaFin, err := time.Parse(formato, horaFinStr)
-	if err != nil {
-		return nil, fmt.Errorf("error al parsear la hora de fin: %v", err)
-	}
-
+func NewPeriodo(horaInicio, horaFin HoraMinutos) (*Periodo, error) {
 	// Verificar que la hora de inicio es anterior a la hora de fin
-	if horaInicio.After(horaFin) {
+	if horaInicio.Hora > horaFin.Hora || (horaInicio.Hora == horaFin.Hora && horaInicio.Minutos > horaFin.Minutos) {
 		return nil, errors.New("la hora de inicio debe ser anterior a la hora de fin")
 	}
 
