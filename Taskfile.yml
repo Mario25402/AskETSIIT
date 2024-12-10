@@ -9,4 +9,4 @@ tasks:
   check:
     desc: Comprueba la sintaxis de los archivos fuente
     cmds:
-      - go fmt ./...
+      - gofmt -e .
