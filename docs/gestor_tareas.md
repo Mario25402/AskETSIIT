@@ -2,7 +2,7 @@
 ## Requisitos de aceptación:
 
 - **Madurez y progreso:** El nivel de desarrollo de la herramienta debe ser suficiente y debe seguir teniendo mantenimiento frecuente para maximizar la compatibilidad con el lenguaje y minimizar los errores.
-- **Adición de complejidad:** Se valorará que la curva de aprendizaje de la herramienta sea simple o menor que las demás.
+- **Adición de complejidad:** Se valorará que la sintaxis sea entendible, que no añada obstaculos en el proceso de aprendizazje.
 
 ## Opciones
 ### Mage
