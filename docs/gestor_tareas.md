@@ -25,10 +25,10 @@
 2. No requiere de grandes conocimientos aunque utiliza una sintaxis específica no muy compleja.
 
 ### Just
-[Just](https://just.systems/) es un gestor ligero similar a Mage pero más simplista.
+[Just](https://just.systems/) es un gestor ligero similar a ´Make´ pero más simplista.
 
 1. Desarrollo activo aunque menos utilizado que otras herramientas.
-2. Sintaxis única, similar a la de `Make`.
+2. Sintaxis única y limpia, similar a la de `Make`.
 
 ## Conclusión
 Aunque todas las opciones podrían ser consideradas en diferentes ámbitos debido a sus similitudes, vamos a ir nombrando a la que va a ser nuestra elección:
