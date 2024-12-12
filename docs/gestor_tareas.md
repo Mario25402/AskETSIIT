@@ -27,13 +27,13 @@
 ### Just
 [Just](https://just.systems/) es un gestor ligero similar a ´Make´ pero más simplista.
 
-1. Desarrollo activo aunque menos utilizado que otras herramientas.
+1. Desarrollo menos mantenido y menos extendido.
 2. Sintaxis única y limpia, similar a la de `Make`.
 
 ## Conclusión
 Aunque todas las opciones podrían ser consideradas en diferentes ámbitos debido a sus similitudes, vamos a ir nombrando a la que va a ser nuestra elección:
 
-- **Just**: Su sintaxis única hace que se valore el su uso además, durante su instalación nos encontramos problemas con los repositorios y de dependecias externas.
+- **Just**: Su sintaxis única hace que se cuestione su uso además, durante su instalación nos encontramos problemas con los repositorios y de dependecias externas.
 - **Make**: Aunque muy buena opción, es preferible usar herramientas más intuitivas y mejor adaptadas a lenguajes actuales.
 - **Mage**: Sintaxis un poco más compleja que otras opciones que aumentará la curva de aprendizaje.
 - **Task**: Gracias a la simple configuración con *YAML* consideramos ésta como nuestra elección.
