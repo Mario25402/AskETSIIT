@@ -27,7 +27,7 @@
 ### Just
 [Just](https://just.systems/) es un gestor ligero similar a ´Make´ pero más simplista.
 
-- Desarrollo menos mantenido y menos extendido entre la comunidad.
+- Herramienta menos extendida entre la comunidad.
 - Último *release* hace 3 días, *commits* muy frecuentes.
 
 ### Dagger
@@ -37,15 +37,12 @@
 - Último *release* hace unos días, *commits* muy frecuentes.
 
 ### Goyek
-[Goyek](https://github.com/goyek/goyek) es una biblioteca ligera para definir y ejecutar pipelines de tareas directamente en Go
+[Goyek](https://github.com/goyek/goyek) es una biblioteca ligera para definir y ejecutar pipelines de tareas directamente en Go.
 
 - Proyecto no tan completo como otras opciones.
 - Último *release* hace unos meses, *commits* frecuentes.
 
 ## Conclusión
-Aunque todas las opciones podrían ser consideradas en diferentes ámbitos debido a sus similitudes, vamos a ir nombrando a la que va a ser nuestra elección:
+Vistas diferentes alternativas para nuestra elección como gestor de tareas, podemos concluir diciendo que no escogeremos `Goyek` porque no es una herramienta tan avanzada como las demás, `Dager` tiene dependecias con *docker* lo que añadiría peso innecesario a nuestro proyecto. Tampoco elegiremos `Mage` ya que no recibe tanto desarrollo como otras alternativas.
 
-- **Just**: Su sintaxis única hace que se cuestione su uso además, durante su instalación nos encontramos problemas con los repositorios y de dependecias externas.
-- **Make**: Aunque muy buena opción, es preferible usar herramientas más intuitivas y mejor adaptadas a lenguajes actuales.
-- **Mage**: Sintaxis un poco más compleja que otras opciones que puede que aumente la curva de aprendizaje al ser escrita en Go.
-- **Task**: Configuración con *YAML*, consideramos ésta como nuestra elección.
+De las herramientas restantes, vamos a seleccionar **Just** por su desarrollo activo frente a *Make* y *Task*.
