@@ -23,8 +23,8 @@ Se va a utilizar [Go Modules](https://go.dev/ref/mod), el gestor oficial de los 
 
 ## Gestor de tareas
 
-Se va a utilizar [Task](https://taskfile.dev/) por su facilidad de uso con archivos de configuración *."yml"* y su versatilidad.
-La primera vez que se use se deberá crear el archivo *"Taskfile.yml"* el cual editaremos con las configuraciones que necesarias.
+Se va a utilizar [Just](https://just.systems/) como gestor por su simplicidad.
+La primera vez que se use se deberá crear el archivo *"justfile"* el cual editaremos con las configuraciones que necesarias.
 
 ## Comprobaciones
 
@@ -33,13 +33,13 @@ El fichero que contiene la declaración de "Clase" será el que implemente la l�
 Para instalar las dependencias usaremos:
 
 ```
-task installdeps
+just install-deps
 ```
 
 Para comprobar la sintaxis debemos usar:
 
 ```
-task check
+just check
 ```
 
 ## Extra
