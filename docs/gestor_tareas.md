@@ -30,6 +30,18 @@
 - Desarrollo menos mantenido y menos extendido entre la comunidad.
 - Último *release* hace 3 días, *commits* muy frecuentes.
 
+## Dagger
+[Dagger](https://dagger.io/) es una herramienta diseñada para simplificar y unificar flujos de trabajo CI/CD y tareas automatizadas en proyectos de software
+
+- Es una herramienta relativamente joven pero con mucha interacción de la comunidad.
+- Último *release* hace unos días, *commits* muy frecuentes.
+
+## Goyek
+[Goyek](https://github.com/goyek/goyek) es una biblioteca ligera para definir y ejecutar pipelines de tareas directamente en Go
+
+- Proyecto no tan completo como otras opciones.
+- Último *release* hace unos meses, *commits* frecuentes.
+
 ## Conclusión
 Aunque todas las opciones podrían ser consideradas en diferentes ámbitos debido a sus similitudes, vamos a ir nombrando a la que va a ser nuestra elección:
 
