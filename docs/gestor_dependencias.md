@@ -7,7 +7,7 @@ La razón principal es la siguiente opción:
 
 ## Go Modules
 
-El gestor oficial de los desarrolladores del lenguaje, nacido en la versión 1.11 y obligatorio desde la versión 1.16.
+El [gestor oficial](https://go.dev/blog/using-go-modules) de los desarrolladores del lenguaje, nacido en la versión 1.11 y obligatorio desde la versión 1.16.
 
 Es el gestor de dependencias por antonomasia de *Golang* debido a que viene incluido de forma nativa en el ecosistema y no necesita de configuración externa, lo que facilita mucho la elección de su uso por los consumidores.
 
