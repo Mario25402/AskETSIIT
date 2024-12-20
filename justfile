@@ -1,5 +1,5 @@
 check:
 	gofmt -e . > /dev/null
 	
-install-deps:
+install:
 	go mod tidy
