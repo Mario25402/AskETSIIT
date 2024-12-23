@@ -1,8 +1,9 @@
 # Gestores de Tareas
 ## Requisitos de aceptación:
 
-- **Progreso:** La herramienta debe seguir teniendo mantenimiento frecuente para maximizar la compatibilidad con el lenguaje y minimizar los errores.
-- El repositorio de GitHub de cada herramienta será revisado individualmente con el fin de ver el nivel/ritmo de desarollo.
+- **Mantenimiento:** Un mantenimiento adecuado es importarte a nivel de seguridad para proteger el entorno de desarrollo ya que los gestores de tareas ejecutan comandos y pueden ser objetivos de busqueda de vulnerabilidades. Por otra parte, si un gestor no es mantenido, puede quedar obsoleto y provocar un trabajo adicional motivado por el cambio de una mala elección, por lo que es recomendable elegir herramientas que disminuyan la deuda técnica, por ello:
+  - La herramienta debe seguir teniendo desarrollo activo y frecuente para maximizar la compatibilidad con el lenguaje, minimizar los errores y las amenazas. 
+  - El repositorio de GitHub de cada una será revisado individualmente, revisando la frecuencia y fechas de los últimos commits y versiones.
 
 ## Opciones
 ### Mage
