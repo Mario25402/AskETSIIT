@@ -10,13 +10,13 @@
 [Mage](https://magefile.org/) es una herramienta escrita en Go que permite definir tareas utilizando el propio lenguaje.
 
 - Activa pero no tan mantenida últimamene.
-- Último *release* hace más de un año, [*commits*](https://github.com/magefile/mage) con frecuencia media.
+- Último *release* hace más de un año, [*commits*](https://github.com/magefile/mage/commits/master/) con frecuencia media.
 
 ### Task
 [Task](https://taskfile.dev/) es un gestor que apuesta por la simplicidad y la versatilidad.
 
 - Actualizaciones frecuentes, compatible con proyectos multilenguaje.
-- Último *release* hace unas semana, [*commits*](https://github.com/go-task/task) frecuentes.
+- Último *release* hace unas semana, [*commits*](https://github.com/go-task/task/commits/main/) frecuentes.
 
 ### Make
 
@@ -29,20 +29,20 @@
 [Just](https://just.systems/) es un gestor ligero similar a ´Make´ pero más simplista.
 
 - Herramienta menos extendida entre la comunidad.
-- Último *release* hace unos días, [*commits*](https://github.com/casey/just) muy frecuentes.
+- Último *release* hace unas semanas, [*commits*](https://github.com/casey/just/commits/master/) muy frecuentes.
 
 ### XC
 
 [XC](https://xcfile.dev/) es un gestor similar a `Make` destinado a minimizar la complejidad, se escribe en `Markdown`.
 
 - Proyecto de 3 años con poca comunidad.
-- Último *release* hace casi un año, sin [*commits*](https://github.com/joerdav/xc) hace meses.
+- Último *release* hace casi un año, sin [*commits*](https://github.com/joerdav/xc/commits/main/) hace meses.
 
 ### Taskrunner
 
 [Taskrunner](https://github.com/samsarahq/taskrunner), herramienta escrita en Go que permite crear tareas reutilizables con nombres y dependecias.
 
-- Sin *releases* oficiales, sin [*commits*](https://github.com/joerdav/xc) desde hace un año.
+- Sin *releases* oficiales, sin [*commits*](https://github.com/samsarahq/taskrunner/commits/master/) desde hace un año.
 
 ## Conclusión
 Vistas diferentes alternativas para nuestra elección como gestor de tareas, podemos concluir diciendo que no escogeremos `XC` porque su mantenimiento es bajo, al igual que el de `Taskrunner`.
