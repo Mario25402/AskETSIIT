@@ -2,8 +2,8 @@
 ## Requisitos de aceptación:
 
 - **Mantenimiento:** Un mantenimiento adecuado es importarte a nivel de seguridad para proteger el entorno de desarrollo ya que los gestores de tareas ejecutan comandos y pueden ser objetivos para búsquedas de vulnerabilidades. Por otra parte, si un gestor no es mantenido, puede quedar obsoleto y provocar un trabajo adicional motivado por el cambio de una mala elección, debido a ésto, lo recomendable es elegir herramientas que disminuyan la deuda técnica.
-  - La herramienta debe seguir teniendo desarrollo activo y frecuente para maximizar la compatibilidad con el lenguaje, minimizar los errores y las amenazas. 
-  - El repositorio de GitHub de cada una será visitado individualmente, revisando la frecuencia y fechas de los últimos commits y versiones.
+  - *Factores convenientes:*
+    - Commits recientes o frecuentes, que indiquen actividad con la comunidad.
 
 ## Opciones
 ### Mage
@@ -45,7 +45,9 @@
 - Sin *releases* oficiales, sin [*commits*](https://github.com/samsarahq/taskrunner/commits/master/) desde hace un año.
 
 ## Conclusión
-Vistas diferentes alternativas para nuestra elección como gestor de tareas, podemos concluir diciendo que no escogeremos `XC` porque su mantenimiento es bajo, al igual que el de `Taskrunner`.
+La mayoría de opciones son poco conocidas y no hay registro de vulnerabilidades en [páginas especializadas](https://www.cvedetails.com/), para las que sí hay, son pocas, en antiguas versiones o funcionalidades que no aplican a nuestro proyecto.
+
+No escogeremos `XC` porque su mantenimiento es bajo en comparación a los demás, al igual que el de `Taskrunner`.
 Tampoco elegiremos `Mage` ya que no recibe tanto desarrollo como otras alternativas.
 
 De las herramientas restantes, vamos a seleccionar **Just** por su desarrollo activo frente a *Make* y *Task*.
