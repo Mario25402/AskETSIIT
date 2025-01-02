@@ -2,8 +2,12 @@
 ## Requisitos de aceptación:
 
 - **Mantenimiento:** Un mantenimiento adecuado es importarte a nivel de seguridad para proteger el entorno de desarrollo ya que los gestores de tareas ejecutan comandos y pueden ser objetivos para búsquedas de vulnerabilidades. Por otra parte, si un gestor no es mantenido, puede quedar obsoleto y provocar un trabajo adicional motivado por el cambio de una mala elección, debido a ésto, lo recomendable es elegir herramientas que disminuyan la deuda técnica.
-  - *Factores convenientes:*
+  
+- **Prestaciones:** Las herramientas deben ser eficientes por lo que será positivo que tengan una buena velocidad de ejecución de las tareas.
+
+- *Factores convenientes:*
     - Commits recientes o frecuentes, que indiquen actividad con la comunidad.
+    - Mayores prestaciones, medido con el tiempo de ejecución de la misma tarea.
 
 ## Opciones
 ### Mage
@@ -11,12 +15,14 @@
 
 - Activa pero no tan mantenida últimamene.
 - Último *release* hace más de un año, [*commits*](https://github.com/magefile/mage/commits/master/) con frecuencia media.
+- Medición de la tarea `check`: 0.288s
 
 ### Task
 [Task](https://taskfile.dev/) es un gestor que apuesta por la simplicidad y la versatilidad.
 
 - Actualizaciones frecuentes, compatible con proyectos multilenguaje.
-- Último *release* hace unas semana, [*commits*](https://github.com/go-task/task/commits/main/) frecuentes.
+- Último *release* hace un mes, [*commits*](https://github.com/go-task/task/commits/main/) frecuentes.
+- Medición de la tarea `check`: 0.22s
 
 ### Make
 
@@ -24,19 +30,22 @@
 
 - Estable y fuertemente asentado. Mantenimiento escaso debido a su gran robustez.
 - Último *release* hace más de un año.
+- Medición de la tarea `check`: 0.16s
 
 ### Just
 [Just](https://just.systems/) es un gestor ligero similar a ´Make´ pero más simplista.
 
 - Herramienta menos extendida entre la comunidad.
 - Último *release* hace unas semanas, [*commits*](https://github.com/casey/just/commits/master/) muy frecuentes.
+- Medición de la tarea `check`: 0.19s
 
 ### XC
 
 [XC](https://xcfile.dev/) es un gestor similar a `Make` destinado a minimizar la complejidad, se escribe en `Markdown`.
 
 - Proyecto de 3 años con poca comunidad.
-- Último *release* hace casi un año, sin [*commits*](https://github.com/joerdav/xc/commits/main/) hace meses.
+- Último *release* hace unos días, sin [*commits*](https://github.com/joerdav/xc/commits/main/) hace pocos días.
+- Medición de la tarea `check`: 0.21s
 
 ### Taskrunner
 
@@ -47,7 +56,10 @@
 ## Conclusión
 La mayoría de opciones son poco conocidas y no hay registro de vulnerabilidades en [páginas especializadas](https://www.cvedetails.com/), para las que sí hay, son pocas, en antiguas versiones o funcionalidades que no aplican a nuestro proyecto.
 
-No escogeremos `XC` porque su mantenimiento es bajo en comparación a los demás, al igual que el de `Taskrunner`.
-Tampoco elegiremos `Mage` ya que no recibe tanto desarrollo como otras alternativas.
+La opción de usar `Taskrunner` quedará descartada porque lleva tiempo sin ser actualizada con lo que es posible que se haya abandonado el proyecto y la herramienta quede obsoleta (ya se pueden ir viendo estos detalles por los problemas durante la instalación).
 
-De las herramientas restantes, vamos a seleccionar **Just** por su desarrollo activo frente a *Make* y *Task*.
+`Mage` es el siguiente descarte debido a que es el que mayor tiempo tarda en realizar la tarea y su ritmo de desarrollo no es tan activo como otras alternativas.
+
+`XC` y `Task` están en una situación similar, proyectos mantenidos, con mejor tiempo que `Mage` pero siguen sin ser los mejores.
+
+Por último entre `Make` y `Just`, que son los dos que mejores tiempos consiguen, elegiremos **Just**.
