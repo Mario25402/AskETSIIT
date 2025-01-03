@@ -3,5 +3,5 @@ entidad:
   - internal/models/clase.go
   
 automatizar:
-  fichero: justfile
-  orden: just
+  fichero: makefile
+  orden: make
