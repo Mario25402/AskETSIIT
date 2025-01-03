@@ -1,7 +1,7 @@
 # Gestores de Tareas
 ## Requisitos de aceptación:
 
-- **Mantenimiento:** Un mantenimiento adecuado es importarte a nivel de seguridad para proteger el entorno de desarrollo ya que los gestores de tareas ejecutan comandos y pueden ser objetivos para búsquedas de vulnerabilidades. Por otra parte, si un gestor no es mantenido, puede quedar obsoleto y provocar un trabajo adicional motivado por el cambio de una mala elección, debido a ésto, lo recomendable es elegir herramientas que disminuyan la deuda técnica.
+- **Mantenimiento:** Si un gestor no es mantenido, puede quedar obsoleto y provocar un trabajo adicional motivado por el cambio de una mala elección, debido a ésto, lo recomendable es elegir herramientas que disminuyan la deuda técnica.
   
 - **Prestaciones:** Las herramientas deben ser eficientes por lo que será positivo que tengan una buena velocidad de ejecución de las tareas.
 
@@ -54,8 +54,6 @@
 - Sin *releases* oficiales, sin [*commits*](https://github.com/samsarahq/taskrunner/commits/master/) desde hace un año.
 
 ## Conclusión
-La mayoría de opciones son poco conocidas y no hay registro de vulnerabilidades en [páginas especializadas](https://www.cvedetails.com/), para las que sí hay, son pocas, en antiguas versiones o funcionalidades que no aplican a nuestro proyecto.
-
 La opción de usar `Taskrunner` quedará descartada porque lleva tiempo sin ser actualizada con lo que es posible que se haya abandonado el proyecto y la herramienta quede obsoleta (ya se pueden ir viendo estos detalles por los problemas durante la instalación).
 
 `Mage` es el siguiente descarte debido a que es el que mayor tiempo tarda en realizar la tarea y su ritmo de desarrollo no es tan activo como otras alternativas.
