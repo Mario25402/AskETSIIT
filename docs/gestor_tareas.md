@@ -5,10 +5,6 @@
   
 - **Prestaciones:** Las herramientas deben ser eficientes por lo que será positivo que tengan una buena velocidad de ejecución de las tareas.
 
-- *Factores convenientes:*
-    - Commits recientes o frecuentes, que indiquen actividad con la comunidad.
-    - Mayores prestaciones, medido con el tiempo de ejecución de la misma tarea.
-
 ## Opciones
 ### Mage
 [Mage](https://magefile.org/) es una herramienta escrita en Go que permite definir tareas utilizando el propio lenguaje.
