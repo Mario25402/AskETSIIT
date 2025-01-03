@@ -3,7 +3,7 @@
 
 - **Mantenimiento:** Si un gestor no es mantenido, puede quedar obsoleto y provocar un trabajo adicional motivado por el cambio de una mala elección, debido a ésto, lo recomendable es elegir herramientas que disminuyan la deuda técnica. Éste criterio se medirá por la frecuencia de commits de los repositorios oficiales de Github.
   
-- **Prestaciones:** Las herramientas deben ser eficientes por lo que será positivo que tengan una buena velocidad de ejecución de las tareas.
+- **Prestaciones:** Las herramientas deben ser eficientes por lo que será positivo que tengan una buena velocidad de ejecución de las tareas. [Pruebas](../task_test/)
 
 ## Opciones
 ### Mage
@@ -11,14 +11,14 @@
 
 - Activa pero no tan mantenida últimamene.
 - Último *release* hace más de un año, [*commits*](https://github.com/magefile/mage/commits/master/) con frecuencia media.
-- Medición de la tarea `check`: 0.288s
+- Medición de la tarea `check`: 0.886s
 
 ### Task
 [Task](https://taskfile.dev/) es un gestor que apuesta por la simplicidad y la versatilidad.
 
 - Actualizaciones frecuentes, compatible con proyectos multilenguaje.
 - Último *release* hace un mes, [*commits*](https://github.com/go-task/task/commits/main/) frecuentes.
-- Medición de la tarea `check`: 0.22s
+- Medición de la tarea `check`: 0.124s
 
 ### Make
 
@@ -26,14 +26,14 @@
 
 - Estable y fuertemente asentado. Mantenimiento escaso debido a su gran robustez.
 - Último *release* hace más de un año.
-- Medición de la tarea `check`: 0.16s
+- Medición de la tarea `check`: 0.018s
 
 ### Just
 [Just](https://just.systems/) es un gestor ligero similar a ´Make´ pero más simplista.
 
 - Herramienta menos extendida entre la comunidad.
 - Último *release* hace unas semanas, [*commits*](https://github.com/casey/just/commits/master/) muy frecuentes.
-- Medición de la tarea `check`: 0.19s
+- Medición de la tarea `check`: 0.021s
 
 ### XC
 
@@ -41,7 +41,7 @@
 
 - Proyecto de 3 años con poca comunidad.
 - Último *release* hace unos días, sin [*commits*](https://github.com/joerdav/xc/commits/main/) hace pocos días.
-- Medición de la tarea `check`: 0.21s
+- Medición de la tarea `check`: 0.021s
 
 ### Taskrunner
 
@@ -54,6 +54,6 @@ La opción de usar `Taskrunner` quedará descartada porque lleva tiempo sin ser 
 
 `Mage` es el siguiente descarte debido a que es el que mayor tiempo tarda en realizar la tarea y su ritmo de desarrollo no es tan activo como otras alternativas.
 
-`XC` y `Task` están en una situación similar, proyectos mantenidos, con mejor tiempo que `Mage` pero siguen sin ser los mejores.
+`Task` está en una situación similar, proyecto mantenido, con mejor tiempo que `Mage` pero sigue sin ser el mejor.
 
-Por último entre `Make` y `Just`, que son los dos que mejores tiempos consiguen, elegiremos **Make** porque consigue unas mejores prestaciones.
+Por último entre `XC`, `Make` y `Just`, que son los que mejores tiempos consiguen, elegiremos **Make** porque obtien un mejor resultado.
