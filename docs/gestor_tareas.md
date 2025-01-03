@@ -1,7 +1,7 @@
 # Gestores de Tareas
 ## Requisitos de aceptación:
 
-- **Mantenimiento:** Si un gestor no es mantenido, puede quedar obsoleto y provocar un trabajo adicional motivado por el cambio de una mala elección, debido a ésto, lo recomendable es elegir herramientas que disminuyan la deuda técnica.
+- **Mantenimiento:** Si un gestor no es mantenido, puede quedar obsoleto y provocar un trabajo adicional motivado por el cambio de una mala elección, debido a ésto, lo recomendable es elegir herramientas que disminuyan la deuda técnica. Éste criterio se medirá por la frecuencia de commits de los repositorios oficiales de Github.
   
 - **Prestaciones:** Las herramientas deben ser eficientes por lo que será positivo que tengan una buena velocidad de ejecución de las tareas.
 
