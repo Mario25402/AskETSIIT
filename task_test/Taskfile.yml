@@ -1,8 +1,0 @@
-version: '3'
-
-tasks:
-  check:
-    desc: Comprueba la sintaxis de los archivos fuente
-    cmds:
-      - gofmt -e ../internal > /dev/null
-

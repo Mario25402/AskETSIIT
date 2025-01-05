@@ -1,2 +1,0 @@
-check:
-	gofmt -e ../internal > /dev/null
