@@ -25,8 +25,8 @@ Se va a utilizar [Go Modules](https://go.dev/ref/mod), el gestor oficial de los 
 ## Gestor de tareas
 [Comparativa](./docs/gestor_tareas.md)
 
-Se va a utilizar [Just](https://just.systems/) como gestor por su simplicidad.
-La primera vez que se use se deberá crear el archivo *"justfile"* el cual editaremos con las configuraciones que necesarias.
+Se va a utilizar [Make](https://www.gnu.org/software/make/manual/make.html) como gestor por su gran capacidad y resultados.
+Se deberá crear el archivo *"makefile"* el cual editaremos con las configuraciones que necesarias.
 
 ## Comprobaciones
 
@@ -35,13 +35,13 @@ El fichero que contiene la declaración de "Clase" será el que implemente la l�
 Para instalar las dependencias usaremos:
 
 ```
-just install
+make install
 ```
 
 Para comprobar la sintaxis debemos usar:
 
 ```
-just check
+make check
 ```
 
 ## Extra
