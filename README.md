@@ -12,11 +12,37 @@ Es muy común ver a gente, en cualquier altura del curso, preguntar acerca de:
 
 Información que se encuentra escondida bajo muchos enlaces o documentos en páginas confusas y que hacen dificultosa la aclaración de las dudas y la consulta constante de las mismas.
 
-## Historias de Usuario
-[Link](./docs/HUs.md)
+## Documentos
 
-## Milestones
-[Link](./docs/MSs.md)
+[Historias de usuario](./docs/HUs.md)
+[Milestones](./docs/MSs.md)
+
+## Gestor de dependencias
+[Comparativa](./docs/gestor_dependencias.md)
+
+Se va a utilizar [Go Modules](https://go.dev/ref/mod), el gestor oficial de los desarrolladores de Golang.
+
+## Gestor de tareas
+[Comparativa](./docs/gestor_tareas.md)
+
+Se va a utilizar [Just](https://just.systems/) como gestor por su simplicidad.
+La primera vez que se use se deberá crear el archivo *"justfile"* el cual editaremos con las configuraciones que necesarias.
+
+## Comprobaciones
+
+El fichero que contiene la declaración de "Clase" será el que implemente la lógica de negocio ya que sobre él recae el procesamiento principal del proyecto.
+
+Para instalar las dependencias usaremos:
+
+```
+just install
+```
+
+Para comprobar la sintaxis debemos usar:
+
+```
+just check
+```
 
 ## Extra
 

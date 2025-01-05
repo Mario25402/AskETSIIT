@@ -1,0 +1,7 @@
+lenguaje: Go
+entidad:
+  - internal/models/clase.go
+  
+automatizar:
+  fichero: makefile
+  orden: make
