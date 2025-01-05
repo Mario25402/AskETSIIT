@@ -1,3 +1,8 @@
 lenguaje: Go
-entidad: 
-  - internal/models/horario.go
+
+entidad:
+  - internal/models/clase.go
+  
+automatizar:
+  fichero: makefile
+  orden: make
