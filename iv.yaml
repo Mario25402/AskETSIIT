@@ -1,4 +1,5 @@
 lenguaje: Go
+
 entidad:
   - internal/models/clase.go
   
