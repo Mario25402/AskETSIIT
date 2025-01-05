@@ -56,4 +56,4 @@ La opción de usar `Taskrunner` quedará descartada porque lleva tiempo sin ser 
 
 `Task` está en una situación similar, proyecto mantenido, con mejor tiempo que `Mage` pero sigue sin ser el mejor.
 
-Por último entre `XC`, `Make` y `Just`, que son los que mejores tiempos consiguen, elegiremos **Make** porque obtien un mejor resultado.
+Por último entre `XC`, `Make` y `Just`, que son los que mejores tiempos consiguen, elegiremos **Make** porque obtiene un mejor resultado.
