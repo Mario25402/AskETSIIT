@@ -2,7 +2,11 @@ package models
 
 import (
 	"errors"
+	"strconv"
+	"strings"
 )
+
+///////////////////////////////////////
 
 type MinutosPosibles string
 
@@ -11,33 +15,116 @@ const (
 	YMedia  MinutosPosibles = "Y Media"
 )
 
+// Convierte un string en MinutosPosibles
+func strMinutos(mins string) (MinutosPosibles, error) {
+	if mins == "00" {
+		return EnPunto, nil
+	} else if mins == "30" {
+		return YMedia, nil
+	} else {
+		return "", errors.New("los minutos deben ser 00 o 30")
+	}
+}
+
+// Convierte un MinutosPosibles en string
+func minutosStr(mins MinutosPosibles) string {
+	if mins == EnPunto {
+		return "00"
+	} else if mins == YMedia {
+		return "30"
+	} else {
+		return ""
+	}
+}
+
+///////////////////////////////////////
+
 type HoraMinutos struct {
 	Hora    int // 0-23
 	Minutos MinutosPosibles
 }
 
-func NewHoraMinutos(hora int, minutos MinutosPosibles) (*HoraMinutos, error) {
-	if hora < 0 || hora > 23 {
+// Devuelve un string de la forma "HH:MM"
+func GetHoraMinutosStr(hm *HoraMinutos) string {
+	return strconv.Itoa(hm.Hora) + ":" + minutosStr(hm.Minutos)
+}
+
+// Crea un nuevo HoraMinutos de la forma HH, MM
+func newHoraMinutos(horas int, mins MinutosPosibles) (*HoraMinutos, error) {
+	if horas < 0 || horas > 23 {
 		return nil, errors.New("la hora debe estar entre 0 y 23")
 	}
-	return &HoraMinutos{Hora: hora, Minutos: minutos}, nil
+	return &HoraMinutos{Hora: horas, Minutos: mins}, nil
 }
+
+// Crea un nuevo HoraMinutos de la forma "HH:MM"
+func NewHoraMinutosStr(tiempo string) (*HoraMinutos, error) {
+	partes := strings.Split(tiempo, ":")
+	if len(partes) != 2 {
+		return nil, errors.New("la hora debe tener el formato HH:MM")
+	}
+
+	horas, err := strconv.Atoi(partes[0])
+	if err != nil {
+		return nil, err
+	}
+
+	return NewHoraMinutosSplit(horas, partes[1])
+}
+
+// Crea un nuevo HoraMinutos de la forma HH, "MM"
+func NewHoraMinutosSplit(horas int, mins string) (*HoraMinutos, error) {
+	minutos, err := strMinutos(mins)
+	if err != nil {
+		return nil, err
+	}
+
+	return newHoraMinutos(horas, minutos)
+}
+
+///////////////////////////////////////
 
 type Periodo struct {
 	HoraInicio HoraMinutos
 	HoraFin    HoraMinutos
 }
 
-func NewPeriodo(horaInicio, horaFin HoraMinutos) (*Periodo, error) {
+// Nuevo periodo de la forma HH:MM - HH:MM
+func newPeriodo(horaInicio, horaFinal HoraMinutos) (*Periodo, error) {
 	// Verificar que la hora de inicio es anterior a la hora de fin
-	if horaInicio.Hora > horaFin.Hora || (horaInicio.Hora == horaFin.Hora && horaInicio.Minutos > horaFin.Minutos) {
+	if horaInicio.Hora > horaFinal.Hora || (horaInicio.Hora == horaFinal.Hora && horaInicio.Minutos > horaFinal.Minutos) {
 		return nil, errors.New("la hora de inicio debe ser anterior a la hora de fin")
 	}
-	// Crear y devolver el Periodo si todo es válido
-	periodo := &Periodo{
-		HoraInicio: horaInicio,
-		HoraFin:    horaFin,
+
+	return &Periodo{HoraInicio: horaInicio, HoraFin: horaFinal}, nil
+}
+
+// Nuevo periodo de la forma "HH:MM" - "HH:MM"
+func NewPeriodoStr(tiempoInicio, tiempoFinal string) (*Periodo, error) {
+	ini, err := NewHoraMinutosStr(tiempoInicio)
+	if err != nil {
+		return nil, err
 	}
 
-	return periodo, nil
+	fin, err := NewHoraMinutosStr(tiempoFinal)
+	if err != nil {
+		return nil, err
+	}
+
+	return newPeriodo(*ini, *fin)
+}
+
+// Nuevo periodo de la forma HH, "MM" - HH, "MM"
+func NewPeriodoSplit(horasIni int, minsIni string, horasFin int, minsFin string) (*Periodo, error) {
+	ini, err := NewHoraMinutosSplit(horasIni, minsIni)
+	if err != nil {
+		return nil, err
+	}
+
+	fin, err := NewHoraMinutosSplit(horasFin, minsFin)
+	if err != nil {
+		return nil, err
+	}
+
+	return newPeriodo(*ini, *fin)
 }
