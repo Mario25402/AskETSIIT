@@ -1,0 +1,26 @@
+# Biblioteca de aserciones
+## Criterios de aceptación
+ - Completitud de la biblioteca.
+ - Compatibilidad con el estándar *go test*.
+ - Mantenimiento y actualización del paquete, juzgado desde el repositorio oficial en GitHub.
+
+## Opciones
+### 1. [Testify](https://github.com/stretchr/testify)
+- Aserciones avanzadas e inclusión de mocks (componentes que imitan el comportamiento real en un sistema).
+- Compatible con *go test*.
+- Repositorio con casi 24k estrellas, y con [commits](https://github.com/stretchr/testify/commits/master/) recientes de hace unas semanas.
+
+### 2. [Gomega](https://github.com/onsi/gomega)
+- Enfocada en BDD y con posibilidad de crear aserciones personalizadas.
+- Compatible en cierta medida pero mayormente pensada para utilizar con el framework **Ginkgo**.
+- Repositorio con 2.2k estrellas, [commits](https://github.com/onsi/gomega/commits/master/) muy recientes.
+
+### 3. [Check](https://github.com/go-check/check)
+- Conjunto amplio de aserciones, con funciones avanzadas.
+- Compatible con *go test* pero no tan sincronizada como *Testify*.
+- Repositorio con alrededor de 60 estrellas, sin [commits](https://github.com/go-check/check/commits/master/) desde hace varios años.
+
+## Conclusión
+`Check` es una opción completa pero sin mantenimiento desde hace 5 años por lo que la catalogaremos como obsoleta y quedará descartada.
+
+`Gomega` es una alternativa muy bueno pero exprime su máximo potencial cuando se combina con Ginkgo por lo que `Testify` será nuestra opción ya que es una opción potente y muy desarollada y utilizada por la comunidad.
