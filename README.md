@@ -30,7 +30,7 @@ Se deberá crear el archivo *"makefile"* el cual editaremos con las configuracio
 
 ## Comprobaciones
 
-El fichero que contiene la declaración de "Clase" será el que implemente la lógica de negocio ya que sobre él recae el procesamiento principal del proyecto.
+El fichero que contiene la declaración de "Horario" será el que implemente la lógica de negocio ya que sobre él recae el procesamiento principal del proyecto.
 
 Para instalar las dependencias usaremos:
 
@@ -42,6 +42,11 @@ Para comprobar la sintaxis debemos usar:
 
 ```
 make check
+```
+
+Para ejecutar el testeo del código se usará:
+```
+make test
 ```
 
 ## Extra
