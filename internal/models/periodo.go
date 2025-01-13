@@ -6,8 +6,6 @@ import (
 	"strings"
 )
 
-///////////////////////////////////////
-
 type MinutosPosibles string
 
 const (
@@ -35,19 +33,15 @@ func minutosStr(mins MinutosPosibles) string {
 	}
 }
 
-///////////////////////////////////////
-
 type HoraMinutos struct {
 	Hora    int // 0-23
 	Minutos MinutosPosibles
 }
 
-// Devuelve un string de la forma "HH:MM"
 func GetHoraMinutosStr(hm *HoraMinutos) string {
 	return strconv.Itoa(hm.Hora) + ":" + minutosStr(hm.Minutos)
 }
 
-// Crea un nuevo HoraMinutos de la forma HH, MM
 func newHoraMinutos(horas int, mins MinutosPosibles) (*HoraMinutos, error) {
 	if horas < 0 || horas > 23 {
 		return nil, errors.New("la hora debe estar entre 0 y 23")
@@ -55,7 +49,6 @@ func newHoraMinutos(horas int, mins MinutosPosibles) (*HoraMinutos, error) {
 	return &HoraMinutos{Hora: horas, Minutos: mins}, nil
 }
 
-// Crea un nuevo HoraMinutos de la forma "HH:MM"
 func NewHoraMinutosStr(tiempo string) (*HoraMinutos, error) {
 	partes := strings.Split(tiempo, ":")
 	if len(partes) != 2 {
@@ -70,7 +63,6 @@ func NewHoraMinutosStr(tiempo string) (*HoraMinutos, error) {
 	return NewHoraMinutosSplit(horas, partes[1])
 }
 
-// Crea un nuevo HoraMinutos de la forma HH, "MM"
 func NewHoraMinutosSplit(horas int, mins string) (*HoraMinutos, error) {
 	minutos, err := strMinutos(mins)
 	if err != nil {
@@ -80,16 +72,12 @@ func NewHoraMinutosSplit(horas int, mins string) (*HoraMinutos, error) {
 	return newHoraMinutos(horas, minutos)
 }
 
-///////////////////////////////////////
-
 type Periodo struct {
 	HoraInicio HoraMinutos
 	HoraFin    HoraMinutos
 }
 
-// Nuevo periodo de la forma HH:MM - HH:MM
 func newPeriodo(horaInicio, horaFinal HoraMinutos) (*Periodo, error) {
-	// Verificar que la hora de inicio es anterior a la hora de fin
 	if horaInicio.Hora > horaFinal.Hora || (horaInicio.Hora == horaFinal.Hora && horaInicio.Minutos > horaFinal.Minutos) {
 		return nil, errors.New("la hora de inicio debe ser anterior a la hora de fin")
 	}
@@ -97,7 +85,6 @@ func newPeriodo(horaInicio, horaFinal HoraMinutos) (*Periodo, error) {
 	return &Periodo{HoraInicio: horaInicio, HoraFin: horaFinal}, nil
 }
 
-// Nuevo periodo de la forma "HH:MM" - "HH:MM"
 func NewPeriodoStr(tiempoInicio, tiempoFinal string) (*Periodo, error) {
 	ini, err := NewHoraMinutosStr(tiempoInicio)
 	if err != nil {
@@ -112,7 +99,6 @@ func NewPeriodoStr(tiempoInicio, tiempoFinal string) (*Periodo, error) {
 	return newPeriodo(*ini, *fin)
 }
 
-// Nuevo periodo de la forma HH, "MM" - HH, "MM"
 func NewPeriodoSplit(horasIni int, minsIni string, horasFin int, minsFin string) (*Periodo, error) {
 	ini, err := NewHoraMinutosSplit(horasIni, minsIni)
 	if err != nil {

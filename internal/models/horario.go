@@ -13,8 +13,6 @@ type Horario struct {
 	Clases map[DiaSemana.DiaSemana]map[HoraMinutos]*Clase
 }
 
-///////////////////////////////////////
-
 func (horario Horario) GetClase(dia DiaSemana.DiaSemana, hora string) *Clase {
 	time, err := NewHoraMinutosStr(hora)
 	if err != nil {
@@ -23,8 +21,6 @@ func (horario Horario) GetClase(dia DiaSemana.DiaSemana, hora string) *Clase {
 
 	return horario.Clases[dia][*time]
 }
-
-///////////////////
 
 func extraerClases(fileName string) (*[]Clase, error) {
 	var err error
@@ -39,14 +35,12 @@ func extraerClases(fileName string) (*[]Clase, error) {
 	file, _ := os.Open(fileName)
 	defer file.Close()
 
-	// Expresiones regulares para buscar la información
 	expAsignatura := regexp.MustCompile(`<h1 class=\"page-title\">([^<]+)</h1>`)
 	expDia := regexp.MustCompile(`<div class=\"clase dia-(\d)\"`)
 	expGrupo := regexp.MustCompile(`<div class=\"grupo\"><span>Grupo:</span>\s*([A-Za-z]|\d{1,2})</div>`)
 	expAula := regexp.MustCompile(`<div>Aula:\s*(\d+)</div>`)
 	expHorario := regexp.MustCompile(`<div>Horario:\s*De\s*(\d{2}:\d{2})\s*a\s*(\d{2}:\d{2})</div>`)
 
-	// Lectura de archivo y comprobación de apariciones
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		linea := scanner.Text()
@@ -98,8 +92,6 @@ func extraerClases(fileName string) (*[]Clase, error) {
 	}
 }
 
-///////////////////
-
 func extraerProfesor(fileName string, clase *Clase) (*Clase, error) {
 	var prof string
 	var grupos []string
@@ -108,12 +100,10 @@ func extraerProfesor(fileName string, clase *Clase) (*Clase, error) {
 	file, _ := os.Open(fileName)
 	defer file.Close()
 
-	// Expresiones regulares para buscar la inforamción
 	expProf := regexp.MustCompile(`<a href=\"https://www.ugr.es/personal/[^>]*\">([^<]+)</a>`)
 	expGrupos := regexp.MustCompile(`Grupos?&nbsp;`)
 	expNumGp := regexp.MustCompile(`([A-Z]|\d{1,2})(,\s*([A-Z]|\d{1,2}))*\s*(y\s*([A-Z]|\d{1,2}))?$`)
 
-	// Lectura de archivo y comprobación de apariciones
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		linea := scanner.Text()
@@ -132,7 +122,6 @@ func extraerProfesor(fileName string, clase *Clase) (*Clase, error) {
 			if matches := expNumGp.FindStringSubmatch(linea); matches != nil {
 				grupo := matches[0]
 
-				// Limpiar y dividir los grupos
 				grupo = strings.ReplaceAll(grupo, " y ", ",")
 				grupos = append(grupos, strings.Split(grupo, ",")...)
 
@@ -151,8 +140,6 @@ func extraerProfesor(fileName string, clase *Clase) (*Clase, error) {
 
 	return nil, errors.New("no se ha encontrado profesor para el grupo buscado")
 }
-
-///////////////////
 
 func NewHorarioFromClases(clases []Clase) Horario {
 	horario := Horario{Clases: make(map[DiaSemana.DiaSemana]map[HoraMinutos]*Clase)}
