@@ -2,6 +2,7 @@
 ## Criterios de aceptación
  - Mantenimiento y actualización del paquete, que cumpla este requisito es importante debido a que si una herramienta no se corrige o no se actualiza conforme se renuevan versiones del lenguaje, puede quedar obsoleta o que parte de código antiguo deje de funcionar.
     - Se valorará que haya commits recientes y que solucionen issues o pull requests abiertos por la comunidad.
+- La herramienta no añade dependencias externas.
 
 ## Opciones
 ### 1. [Testing](https://pkg.go.dev/testing)
@@ -20,4 +21,4 @@
 ## Conclusión
 `GoConvey` es una opción interesante y llamativa debido a su característica gráfica pero su casi nulo mantenimiento puede resultar en problemas con las últimas novedades.
 
-Aunque el uso de `Ginkgo` (en combinación con *Gomega*, generalmente) es notable, nos adheriremos a las mejores prácticas establecidas para el lenguaje en cuyo caso la mejor opción es elegir `Testing`, el estándar desarollado por Google en Go.
+Nos vamos a decantar por el uso de `Testing` debido a que se usa en *Golang nativo* de manera que no se añade ninguna dependencia externa como sí sería el caso de `Ginkgo`, además es una buena práctica usar el estándar.
