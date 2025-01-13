@@ -195,9 +195,6 @@ func TestGetClaseError(t *testing.T) {
 	assert.Nil(t, lunes, "Clase incorrecta")
 }
 
-func TestGetDiaError(t *testing.T) {
-}
-
 func TestExtraerClases(t *testing.T) {
 	html := `
 	<body>
