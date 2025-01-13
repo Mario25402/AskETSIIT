@@ -17,10 +17,10 @@
 
 ### 3. [Check](https://github.com/go-check/check)
 - Conjunto amplio de aserciones, con funciones avanzadas.
-- Compatible con *go test* pero no tan sincronizada como *Testify*.
+- Compatible con *go test*.
 - Repositorio con alrededor de 60 estrellas, sin [commits](https://github.com/go-check/check/commits/master/) desde hace varios años.
 
 ## Conclusión
 `Check` es una opción completa pero sin mantenimiento desde hace 5 años por lo que la catalogaremos como obsoleta y quedará descartada.
 
-`Gomega` es una alternativa muy buena pero exprime su máximo potencial cuando se combina con Ginkgo por lo que `Testify` será nuestra opción ya que es una opción potente y muy desarollada y utilizada por la comunidad.
+En igualdad de condiciones ante la compatibilidad con *go test*, nuestra elección será *Testify* por la mera diferencia de apoyo por parte de la comunidad basandonos en que el repositorio cuenta con casi 22 mil estrellas más de puntuación.
