@@ -1,7 +1,7 @@
 # Frameworks
 ## Criterios de aceptación
- - Seguir las mejores prácticas del lenguaje.
- - Mantenimiento y actualización del framework, juzgado desde el repositorio oficial en GitHub.
+ - Mantenimiento y actualización del paquete, que cumpla este requisito es importante debido a que si una herramienta no se corrige o no se actualiza conforme se renuevan versiones del lenguaje, puede quedar obsoleta o que parte de código antiguo deje de funcionar.
+    - Se valorará que haya commits recientes y que solucionen issues o pull requests abiertos por la comunidad.
 
 ## Opciones
 ### 1. [Testing](https://pkg.go.dev/testing)
