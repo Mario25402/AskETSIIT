@@ -2,6 +2,7 @@
 ## Criterios de aceptación
  - Mantenimiento y actualización del paquete, que cumpla este requisito es importante debido a que si una herramienta no se corrige o no se actualiza conforme se renuevan versiones del lenguaje, puede quedar obsoleta o que parte de código antiguo deje de funcionar.
     - Se valorará que haya commits recientes y que solucionen issues o pull requests abiertos por la comunidad.
+    - Será preferible una herramienta que cuente con mayor apoyo por parte de la comunidad, de manera que obtenga más estrellas en su repositorio de GitHub.
 
 ## Opciones
 ### 1. [Testify](https://github.com/stretchr/testify)
