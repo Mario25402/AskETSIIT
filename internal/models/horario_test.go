@@ -219,30 +219,6 @@ func TestGetClaseError(t *testing.T) {
 	assert.Nil(t, lunes, "Clase incorrecta")
 }
 
-/*func TestGetDia(t *testing.T) {
-	clases := []Clase{
-		{
-			DiaSemana: DiaSemana.Lunes,
-			Periodo: &Periodo{
-				HoraInicio: HoraMinutos{Hora: 8, Minutos: YMedia},
-				HoraFin:    HoraMinutos{Hora: 10, Minutos: YMedia},
-			},
-			Aula: "1",
-			Grupo: Grupo{
-				Nombre:     "A",
-				Asignatura: "Matemáticas",
-				Profesor:   "Juan Pérez",
-			},
-		},
-	}
-
-	horario := NewHorarioFromClases(clases)
-	lunes := horario.GetDia("Lunes")
-
-	assert.Len(t, *lunes, 1, "Número incorrecto de clases")
-	assert.Equal(t, clases[0], (*lunes)[HoraMinutos{Hora: 8, Minutos: YMedia}], "Clase incorrecta")
-}*/
-
 func TestGetDiaError(t *testing.T) {
 }
 
@@ -417,10 +393,7 @@ func TestNewHorarioFromClases(t *testing.T) {
 		},
 	}
 
-	// Llamar a la función
 	horario := NewHorarioFromClases(clases)
-
-	// Verificar la estructura del horario
 	assert.NotNil(t, horario, "El horario no debería ser nulo")
 
 	assert.Len(t, horario.Clases[DiaSemana.Lunes], 2, "Debería haber 2 clase el lunes")
@@ -430,7 +403,6 @@ func TestNewHorarioFromClases(t *testing.T) {
 	assert.Equal(t, "2", horario.GetClase("Lunes", "10:30").Aula)
 	assert.Equal(t, "Ana López", horario.GetClase("Lunes", "10:30").Grupo.Profesor)
 
-	// Verificar las clases en el martes
 	assert.Len(t, horario.Clases[DiaSemana.Martes], 1, "Debería haber 1 clase el martes")
 	assert.Equal(t, "2", horario.GetClase("Martes", "9:30").Aula)
 	assert.Equal(t, "Carlos Gómez", horario.GetClase("Martes", "9:30").Grupo.Profesor)
@@ -463,11 +435,9 @@ func TestExtraerHorarioFromFile(t *testing.T) {
 	</body>
 	`
 
-	// Crear fichero temporal
 	tmpFile := crearFichTmp(html)
 	defer os.Remove(tmpFile)
 
-	// Extraer el horario
 	horario := NewHorarioFromFile(tmpFile)
 	assert.NotNil(t, horario, "Error al extraer el horario")
 	assert.Len(t, horario.Clases[DiaSemana.Lunes], 1, "Número incorrecto de clases")
@@ -490,11 +460,9 @@ func TestExtraerHorarioFromFileErrorProfesor(t *testing.T) {
 	</body>
 	`
 
-	// Crear fichero temporal
 	tmpFile := crearFichTmp(html)
 	defer os.Remove(tmpFile)
 
-	// Extraer el horario
 	horario := NewHorarioFromFile(tmpFile)
 	assert.Nil(t, horario, "Error al extraer el profesor")
 }
@@ -502,11 +470,9 @@ func TestExtraerHorarioFromFileErrorProfesor(t *testing.T) {
 func TestExtraerHorarioFromFileErrorClases(t *testing.T) {
 	html := ``
 
-	// Crear fichero temporal
 	tmpFile := crearFichTmp(html)
 	defer os.Remove(tmpFile)
 
-	// Extraer el horario
 	horario := NewHorarioFromFile(tmpFile)
 	assert.Nil(t, horario, "Error al extraer las clases")
 }

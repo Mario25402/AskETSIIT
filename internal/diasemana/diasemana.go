@@ -10,7 +10,6 @@ const (
 	Viernes   DiaSemana = "Viernes"
 )
 
-// Convierte un DiaSemana en string
 func DiaStr(dia DiaSemana) string {
 	switch dia {
 	case Lunes:
@@ -27,7 +26,6 @@ func DiaStr(dia DiaSemana) string {
 	return ""
 }
 
-// Convierte un string en DiaSemana
 func StrDia(dia string) DiaSemana {
 	switch dia {
 	case "1":

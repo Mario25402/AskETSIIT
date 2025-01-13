@@ -27,7 +27,6 @@ func (horario Horario) GetClase(dia DiaSemana.DiaSemana, hora string) *Clase {
 ///////////////////
 
 func extraerClases(fileName string) (*[]Clase, error) {
-	// Inicialización de variables
 	var err error
 	var clases []Clase
 	var periodo *Periodo
@@ -37,7 +36,6 @@ func extraerClases(fileName string) (*[]Clase, error) {
 	var grupo string
 	var asignatura string
 
-	// Abir y cerrar el archivo
 	file, _ := os.Open(fileName)
 	defer file.Close()
 
@@ -48,7 +46,7 @@ func extraerClases(fileName string) (*[]Clase, error) {
 	expAula := regexp.MustCompile(`<div>Aula:\s*(\d+)</div>`)
 	expHorario := regexp.MustCompile(`<div>Horario:\s*De\s*(\d{2}:\d{2})\s*a\s*(\d{2}:\d{2})</div>`)
 
-	// Leer el archivo
+	// Lectura de archivo y comprobación de apariciones
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		linea := scanner.Text()
@@ -85,7 +83,6 @@ func extraerClases(fileName string) (*[]Clase, error) {
 
 			clases = append(clases, clase)
 
-			// Reiniciar variables
 			asignatura = ""
 			dia = ""
 			grupo = ""
@@ -108,7 +105,6 @@ func extraerProfesor(fileName string, clase *Clase) (*Clase, error) {
 	var grupos []string
 	var leer bool
 
-	// Abrir el archivo
 	file, _ := os.Open(fileName)
 	defer file.Close()
 
@@ -117,7 +113,7 @@ func extraerProfesor(fileName string, clase *Clase) (*Clase, error) {
 	expGrupos := regexp.MustCompile(`Grupos?&nbsp;`)
 	expNumGp := regexp.MustCompile(`([A-Z]|\d{1,2})(,\s*([A-Z]|\d{1,2}))*\s*(y\s*([A-Z]|\d{1,2}))?$`)
 
-	// Leer el archivo
+	// Lectura de archivo y comprobación de apariciones
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		linea := scanner.Text()
@@ -147,14 +143,12 @@ func extraerProfesor(fileName string, clase *Clase) (*Clase, error) {
 					}
 				}
 
-				// Reiniciar variables
 				leer = false
 				grupos = grupos[:0]
 			}
 		}
 	}
 
-	// Si no se encontró el grupo
 	return nil, errors.New("no se ha encontrado profesor para el grupo buscado")
 }
 
@@ -166,12 +160,10 @@ func NewHorarioFromClases(clases []Clase) Horario {
 	for _, clase := range clases {
 		dia := clase.DiaSemana
 
-		// Inicializar el mapa interno (por hora) si aún no existe
 		if horario.Clases[dia] == nil {
 			horario.Clases[dia] = make(map[HoraMinutos]*Clase)
 		}
 
-		// Insertar la clase en la hora correspondiente
 		horaInicio := clase.Periodo.HoraInicio
 		horario.Clases[dia][horaInicio] = &clase
 	}

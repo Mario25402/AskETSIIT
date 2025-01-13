@@ -15,7 +15,6 @@ const (
 	YMedia  MinutosPosibles = "Y Media"
 )
 
-// Convierte un string en MinutosPosibles
 func strMinutos(mins string) (MinutosPosibles, error) {
 	if mins == "00" {
 		return EnPunto, nil
@@ -26,7 +25,6 @@ func strMinutos(mins string) (MinutosPosibles, error) {
 	}
 }
 
-// Convierte un MinutosPosibles en string
 func minutosStr(mins MinutosPosibles) string {
 	if mins == EnPunto {
 		return "00"
