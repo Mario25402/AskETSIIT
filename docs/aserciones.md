@@ -1,8 +1,8 @@
 # Biblioteca de aserciones
 ## Criterios de aceptación
- - Completitud de la biblioteca.
  - Compatibilidad con el estándar *go test*.
- - Mantenimiento y actualización del paquete, juzgado desde el repositorio oficial en GitHub.
+ - Mantenimiento y actualización del paquete, que cumpla este requisito es importante debido a que si una herramienta no se corrige o no se actualiza conforme se renuevan versiones del lenguaje, puede quedar obsoleta o que parte de código antiguo deje de funcionar.
+    - Se valorará que haya commits recientes y que solucionen issues o pull requests abiertos por la comunidad.
 
 ## Opciones
 ### 1. [Testify](https://github.com/stretchr/testify)
@@ -23,4 +23,4 @@
 ## Conclusión
 `Check` es una opción completa pero sin mantenimiento desde hace 5 años por lo que la catalogaremos como obsoleta y quedará descartada.
 
-`Gomega` es una alternativa muy bueno pero exprime su máximo potencial cuando se combina con Ginkgo por lo que `Testify` será nuestra opción ya que es una opción potente y muy desarollada y utilizada por la comunidad.
+`Gomega` es una alternativa muy buena pero exprime su máximo potencial cuando se combina con Ginkgo por lo que `Testify` será nuestra opción ya que es una opción potente y muy desarollada y utilizada por la comunidad.
