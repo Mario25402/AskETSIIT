@@ -92,9 +92,24 @@ func extraerClases(fileName string) (*[]Clase, error) {
 	}
 }
 
+func establecerProfesor(clase *Clase, prof, cadena string) *Clase {
+	var grupos []string
+
+	cadena = strings.ReplaceAll(cadena, " y ", ",")
+	grupos = append(grupos, strings.Split(cadena, ",")...)
+
+	for _, grupo := range grupos {
+		if strings.TrimSpace(grupo) == clase.Grupo.Nombre {
+			clase.Grupo.setProfesor(prof)
+			return clase
+		}
+	}
+
+	return nil
+}
+
 func extraerProfesor(fileName string, clase *Clase) (*Clase, error) {
 	var prof string
-	var grupos []string
 	var leer bool
 
 	file, _ := os.Open(fileName)
@@ -120,20 +135,12 @@ func extraerProfesor(fileName string, clase *Clase) (*Clase, error) {
 
 		if leer {
 			if matches := expNumGp.FindStringSubmatch(linea); matches != nil {
-				grupo := matches[0]
-
-				grupo = strings.ReplaceAll(grupo, " y ", ",")
-				grupos = append(grupos, strings.Split(grupo, ",")...)
-
-				for _, grupo := range grupos {
-					if strings.TrimSpace(grupo) == clase.Grupo.Nombre {
-						clase.Grupo.setProfesor(prof)
-						return clase, nil
-					}
+				clase := establecerProfesor(clase, prof, matches[0])
+				if clase != nil {
+					return clase, nil
 				}
 
 				leer = false
-				grupos = grupos[:0]
 			}
 		}
 	}
