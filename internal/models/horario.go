@@ -22,6 +22,25 @@ func (horario Horario) GetClase(dia DiaSemana.DiaSemana, hora string) *Clase {
 	return horario.Clases[dia][*time]
 }
 
+func comprobarAdicionClase(clases *[]Clase, asignatura, dia, grupo, aula *string, periodo *Periodo) {
+	if *asignatura != "" && *dia != "" && *grupo != "" && *aula != "" && periodo != nil {
+		clase := Clase{
+			DiaSemana: DiaSemana.StrDia(*dia),
+			Periodo:   periodo,
+			Aula:      *aula,
+			Grupo:     Grupo{Nombre: *grupo, Asignatura: *asignatura, Profesor: ""},
+		}
+
+		*clases = append(*clases, clase)
+
+		*asignatura = ""
+		*dia = ""
+		*grupo = ""
+		*aula = ""
+		periodo = nil
+	}
+}
+
 func extraerClases(fileName string) (*[]Clase, error) {
 	var err error
 	var clases []Clase
@@ -67,22 +86,9 @@ func extraerClases(fileName string) (*[]Clase, error) {
 			}
 		}
 
-		if asignatura != "" && dia != "" && grupo != "" && aula != "" && periodo != nil {
-			clase := Clase{
-				DiaSemana: dia,
-				Periodo:   periodo,
-				Aula:      aula,
-				Grupo:     Grupo{Nombre: grupo, Asignatura: asignatura, Profesor: ""},
-			}
+		diaStr := DiaSemana.DiaStr(dia)
+		comprobarAdicionClase(&clases, &asignatura, &diaStr, &grupo, &aula, periodo)
 
-			clases = append(clases, clase)
-
-			asignatura = ""
-			dia = ""
-			grupo = ""
-			aula = ""
-			periodo = nil
-		}
 	}
 
 	if len(clases) == 0 {
