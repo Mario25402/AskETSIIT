@@ -6,16 +6,16 @@
 
 ## Opciones
 ### 1. [Testing](https://pkg.go.dev/testing)
-- Inlcuido en Go de forma nativa.
+Inlcuido en Go de forma nativa.
 - Alineado con las mejores prácticas ya que es desarollado por los mismos creadores.
 - Mantenido y actualizado en cada versión lanzada si fuera necesario.
 
 ### 2. [Ginkgo](https://github.com/onsi/ginkgo)
-- Framework que sigue un estilo BDD con un DSL no convencional.
+Framework que sigue un estilo BDD con un DSL no convencional.
 - Repositorio con 8.5k estrellas, con [commits](https://github.com/onsi/ginkgo/commits/master/) recientes.
 
 ### 3. [GoConvey](https://github.com/smartystreets/goconvey)
-- Herramienta conocida por su interfaz web en tiempo real con un DSL sencillo.
+Herramienta conocida por su interfaz web en tiempo real con un DSL sencillo.
 - Repositorio con 8.3k estrellas, sin [commits](https://github.com/smartystreets/goconvey/commits/master/) desde hace casi un año.
 
 ## Conclusión
