@@ -16,10 +16,10 @@ clean:
 
 test:
 	@echo "Running tests"
-	go test -v ./internal/models/ -cover
+	go test -v ./internal/... -cover
 
 cover:
 	@echo "Running coverage"
-	go test -coverprofile=coverage.out ./internal/models/
+	go test -coverprofile=coverage.out ./internal/...
 	go tool cover -func=coverage.out
 	rm coverage.out
