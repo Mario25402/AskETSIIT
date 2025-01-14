@@ -293,6 +293,24 @@ func TestExtraerProfesorSinGrupo(t *testing.T) {
 	assert.Error(t, err, "Error al extraer profesor")
 }
 
+func TestExtraerClasesErrorSintaxis(t *testing.T) {
+	html := `
+    <li class="profesor">
+        <a href="https://www.ugr.es/personal/8e43782373ab33f672b24a92f8eb9e10">Pedro Martín Cuevas</a>
+        <span class="grupos">
+            4
+        </span>
+    </li>`
+
+	tmpFile := crearFichTmp(html)
+	defer os.Remove(tmpFile)
+
+	clase, _ := NewClase(DiaSemana.Lunes, &Periodo{HoraInicio: HoraMinutos{Hora: 10, Minutos: EnPunto}, HoraFin: HoraMinutos{Hora: 12, Minutos: EnPunto}}, "23", Grupo{Asignatura: "Sistemas Operativos", Nombre: "4", Profesor: ""})
+
+	_, err := extraerProfesor(tmpFile, clase)
+	assert.Error(t, err, "Error al extraer profesor")
+}
+
 func TestNewHorarioFromClases(t *testing.T) {
 	// Crear clases de prueba
 	clases := []Clase{
