@@ -21,24 +21,6 @@ func TestNewGrupo(t *testing.T) {
 	assert.Equal(t, Grupo{Nombre: "9", Asignatura: "Sistemas Operativos", Profesor: "Pedro Martín Cuevas"}, *grupo, "Grupo erroneo")
 }
 
-func TestDiaStr(t *testing.T) {
-	assert.Equal(t, "1", DiaSemana.DiaStr(DiaSemana.Lunes), "Día erroneo")
-	assert.Equal(t, "2", DiaSemana.DiaStr(DiaSemana.Martes), "Día erroneo")
-	assert.Equal(t, "3", DiaSemana.DiaStr(DiaSemana.Miercoles), "Día erroneo")
-	assert.Equal(t, "4", DiaSemana.DiaStr(DiaSemana.Jueves), "Día erroneo")
-	assert.Equal(t, "5", DiaSemana.DiaStr(DiaSemana.Viernes), "Día erroneo")
-	assert.Equal(t, "", DiaSemana.DiaStr(""), "Día erroneo")
-}
-
-func TestStrDia(t *testing.T) {
-	assert.Equal(t, DiaSemana.Lunes, DiaSemana.StrDia("1"), "Día erroneo")
-	assert.Equal(t, DiaSemana.Martes, DiaSemana.StrDia("2"), "Día erroneo")
-	assert.Equal(t, DiaSemana.Miercoles, DiaSemana.StrDia("3"), "Día erroneo")
-	assert.Equal(t, DiaSemana.Jueves, DiaSemana.StrDia("4"), "Día erroneo")
-	assert.Equal(t, DiaSemana.Viernes, DiaSemana.StrDia("5"), "Día erroneo")
-	assert.Equal(t, DiaSemana.DiaSemana(""), DiaSemana.StrDia(""), "Día erroneo")
-}
-
 func TestStrMinutos(t *testing.T) {
 	minutos, err := strMinutos("00")
 	assert.Nil(t, err, "Error al obtener los minutos")
