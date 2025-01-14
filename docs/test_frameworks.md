@@ -21,4 +21,6 @@ Herramienta conocida por su interfaz web en tiempo real con un DSL sencillo.
 ## Conclusión
 `GoConvey` es una opción interesante y llamativa debido a su característica gráfica pero su casi nulo mantenimiento puede resultar en problemas con las últimas novedades.
 
-Nos vamos a decantar por el uso de `Testing` debido a que se usa en *Golang nativo* de manera que no se añade ninguna dependencia externa como sí sería el caso de `Ginkgo`, además es una buena práctica usar el estándar.
+Nos vamos a decantar por el uso de `Testing` debido a que se usa en *Golang nativo* de manera que no se añade ninguna dependencia externa como sí sería el caso de `Ginkgo`, además es una buena práctica usar el estándar. 
+
+Para ejecutarlo, se utilizará el comando "**go test**", que es el [test runner](./test_runner.md) de *Go*, el cuál se apoya en *Testing*.
