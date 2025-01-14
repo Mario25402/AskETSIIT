@@ -22,10 +22,10 @@ func (horario Horario) GetClase(dia DiaSemana.DiaSemana, hora string) *Clase {
 	return horario.Clases[dia][*time]
 }
 
-func comprobarAdicionClase(clases *[]Clase, asignatura, dia, grupo, aula *string, periodo *Periodo) {
+func comprobarAdicionClase(clases *[]Clase, asignatura, grupo, aula *string, dia *DiaSemana.DiaSemana, periodo *Periodo) {
 	if *asignatura != "" && *dia != "" && *grupo != "" && *aula != "" && periodo != nil {
 		clase := Clase{
-			DiaSemana: DiaSemana.StrDia(*dia),
+			DiaSemana: *dia,
 			Periodo:   periodo,
 			Aula:      *aula,
 			Grupo:     Grupo{Nombre: *grupo, Asignatura: *asignatura, Profesor: ""},
@@ -41,54 +41,59 @@ func comprobarAdicionClase(clases *[]Clase, asignatura, dia, grupo, aula *string
 	}
 }
 
+func procesadorClase(dia *DiaSemana.DiaSemana, asignatura, grupo, aula *string, periodo **Periodo) map[*regexp.Regexp]func([]string) error {
+	return map[*regexp.Regexp]func([]string) error{
+		regexp.MustCompile(`<h1 class=\"page-title\">([^<]+)</h1>`): func(matches []string) error {
+			*asignatura = strings.TrimSpace(matches[1])
+			return nil
+		},
+		regexp.MustCompile(`<div class=\"clase dia-(\d)\"`): func(matches []string) error {
+			*dia = DiaSemana.StrDia(matches[1])
+			if *dia == "" {
+				return errors.New("dia no válido")
+			}
+			return nil
+		},
+		regexp.MustCompile(`<div class=\"grupo\"><span>Grupo:</span>\s*([A-Za-z]|\d{1,2})</div>`): func(matches []string) error {
+			*grupo = matches[1]
+			return nil
+		},
+		regexp.MustCompile(`<div>Aula:\s*(\d+)</div>`): func(matches []string) error {
+			*aula = matches[1]
+			return nil
+		},
+		regexp.MustCompile(`<div>Horario:\s*De\s*(\d{2}:\d{2})\s*a\s*(\d{2}:\d{2})</div>`): func(matches []string) error {
+			var err error
+			*periodo, err = NewPeriodoStr(matches[1], matches[2])
+			return err
+		},
+	}
+}
+
 func extraerClases(fileName string) (*[]Clase, error) {
-	var err error
 	var clases []Clase
 	var periodo *Periodo
 	var dia DiaSemana.DiaSemana
-
-	var aula string
-	var grupo string
-	var asignatura string
+	var aula, grupo, asignatura string
 
 	file, _ := os.Open(fileName)
 	defer file.Close()
 
-	expAsignatura := regexp.MustCompile(`<h1 class=\"page-title\">([^<]+)</h1>`)
-	expDia := regexp.MustCompile(`<div class=\"clase dia-(\d)\"`)
-	expGrupo := regexp.MustCompile(`<div class=\"grupo\"><span>Grupo:</span>\s*([A-Za-z]|\d{1,2})</div>`)
-	expAula := regexp.MustCompile(`<div>Aula:\s*(\d+)</div>`)
-	expHorario := regexp.MustCompile(`<div>Horario:\s*De\s*(\d{2}:\d{2})\s*a\s*(\d{2}:\d{2})</div>`)
+	procesador := procesadorClase(&dia, &asignatura, &grupo, &aula, &periodo)
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		linea := scanner.Text()
 
-		if matches := expAsignatura.FindStringSubmatch(linea); matches != nil {
-			asignatura = strings.TrimSpace(matches[1])
-			continue
-		} else if matches := expDia.FindStringSubmatch(linea); matches != nil {
-			dia = DiaSemana.StrDia(matches[1])
-			if dia == "" {
-				return nil, errors.New("dia no válido")
-			}
-			continue
-		} else if matches := expGrupo.FindStringSubmatch(linea); matches != nil {
-			grupo = matches[1]
-			continue
-		} else if matches := expAula.FindStringSubmatch(linea); matches != nil {
-			aula = matches[1]
-			continue
-		} else if matches := expHorario.FindStringSubmatch(linea); matches != nil {
-			periodo, err = NewPeriodoStr(matches[1], matches[2])
-			if err != nil {
-				return nil, err
+		for exp, proc := range procesador {
+			if matches := exp.FindStringSubmatch(linea); matches != nil {
+				if err := proc(matches); err != nil {
+					return nil, err
+				}
 			}
 		}
 
-		diaStr := DiaSemana.DiaStr(dia)
-		comprobarAdicionClase(&clases, &asignatura, &diaStr, &grupo, &aula, periodo)
-
+		comprobarAdicionClase(&clases, &asignatura, &grupo, &aula, &dia, periodo)
 	}
 
 	if len(clases) == 0 {
@@ -114,39 +119,48 @@ func establecerProfesor(clase *Clase, prof, cadena string) *Clase {
 	return nil
 }
 
-func extraerProfesor(fileName string, clase *Clase) (*Clase, error) {
-	var prof string
+func procesadorProfesor(clase *Clase, prof *string) map[*regexp.Regexp]func([]string) *Clase {
 	var leer bool
 
+	return map[*regexp.Regexp]func([]string) *Clase{
+		regexp.MustCompile(`<a href=\"https://www.ugr.es/personal/[^>]*\">([^<]+)</a>`): func(matches []string) *Clase {
+			*prof = strings.TrimSpace(matches[1])
+			return nil
+		},
+		regexp.MustCompile(`Grupos?&nbsp;`): func(matches []string) *Clase {
+			leer = true
+			return nil
+		},
+		regexp.MustCompile(`([A-Z]|\d{1,2})(,\s*([A-Z]|\d{1,2}))*\s*(y\s*([A-Z]|\d{1,2}))?$`): func(matches []string) *Clase {
+			if leer {
+				leer = false
+				return establecerProfesor(clase, *prof, matches[0])
+			}
+
+			return nil
+		},
+	}
+}
+
+func extraerProfesor(fileName string, clase *Clase) (*Clase, error) {
+	var prof string
 	file, _ := os.Open(fileName)
 	defer file.Close()
 
-	expProf := regexp.MustCompile(`<a href=\"https://www.ugr.es/personal/[^>]*\">([^<]+)</a>`)
-	expGrupos := regexp.MustCompile(`Grupos?&nbsp;`)
-	expNumGp := regexp.MustCompile(`([A-Z]|\d{1,2})(,\s*([A-Z]|\d{1,2}))*\s*(y\s*([A-Z]|\d{1,2}))?$`)
+	procesador := procesadorProfesor(clase, &prof)
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		linea := scanner.Text()
 
-		if matches := expProf.FindStringSubmatch(linea); matches != nil {
-			prof = strings.TrimSpace(matches[1])
-			continue
-		}
-
-		if matches := expGrupos.FindStringSubmatch(linea); matches != nil {
-			leer = true
-			continue
-		}
-
-		if leer {
-			if matches := expNumGp.FindStringSubmatch(linea); matches != nil {
-				clase := establecerProfesor(clase, prof, matches[0])
+		for exp, proc := range procesador {
+			if matches := exp.FindStringSubmatch(linea); matches != nil {
+				clase := proc(matches)
 				if clase != nil {
 					return clase, nil
 				}
 
-				leer = false
+				break
 			}
 		}
 	}
