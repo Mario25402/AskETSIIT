@@ -98,17 +98,3 @@ func NewPeriodoStr(tiempoInicio, tiempoFinal string) (*Periodo, error) {
 
 	return newPeriodo(*ini, *fin)
 }
-
-func NewPeriodoSplit(horasIni int, minsIni string, horasFin int, minsFin string) (*Periodo, error) {
-	ini, err := NewHoraMinutosSplit(horasIni, minsIni)
-	if err != nil {
-		return nil, err
-	}
-
-	fin, err := NewHoraMinutosSplit(horasFin, minsFin)
-	if err != nil {
-		return nil, err
-	}
-
-	return newPeriodo(*ini, *fin)
-}

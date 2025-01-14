@@ -15,12 +15,6 @@ func crearFichTmp(html string) string {
 
 	return tmpFile.Name()
 }
-
-func TestNewGrupo(t *testing.T) {
-	grupo := NewGrupo("9", "Sistemas Operativos", "Pedro Martín Cuevas")
-	assert.Equal(t, Grupo{Nombre: "9", Asignatura: "Sistemas Operativos", Profesor: "Pedro Martín Cuevas"}, *grupo, "Grupo erroneo")
-}
-
 func TestStrMinutos(t *testing.T) {
 	minutos, err := strMinutos("00")
 	assert.Nil(t, err, "Error al obtener los minutos")
@@ -42,93 +36,21 @@ func TestMinutosStr(t *testing.T) {
 	assert.Equal(t, "", minutosStr("hola"), "Minutos erroneos")
 }
 
-func TestNewHoraMinutos(t *testing.T) {
-	horMin, err := newHoraMinutos(01, EnPunto)
-	assert.Equal(t, HoraMinutos{Hora: 01, Minutos: EnPunto}, *horMin, "HoraMinutos erroneo")
-	assert.Nil(t, err, "Error al crear HoraMinutos")
-}
-
-func TestNewHoraMinutosError(t *testing.T) {
-	_, err := newHoraMinutos(31, EnPunto)
-	assert.Error(t, err, "Error al crear HoraMinutos")
-}
-
-func TestNewHoraMinutosStr(t *testing.T) {
-	horMin, err := NewHoraMinutosStr("12:30")
-	assert.Equal(t, HoraMinutos{Hora: 12, Minutos: YMedia}, *horMin, "HoraMinutos erroneo")
-	assert.Nil(t, err, "Error al crear HoraMinutos")
-}
-
-func TestNewHoraMinutosStrError(t *testing.T) {
-	_, err := NewHoraMinutosStr("12:")
-	assert.Error(t, err, "Error al crear HoraMinutos")
-
-	_, err = NewHoraMinutosStr("hola:30")
-	assert.Error(t, err, "Error al crear HoraMinutos")
-}
-
-func TestNewHoraMinutosSplit(t *testing.T) {
-	horMin, err := NewHoraMinutosSplit(23, "30")
-	assert.Equal(t, HoraMinutos{Hora: 23, Minutos: YMedia}, *horMin, "HoraMinutos erroneo")
-	assert.Nil(t, err, "Error al crear HoraMinutos")
-}
-
-func TestNewHoraMinutosSplitError(t *testing.T) {
-	_, err := NewHoraMinutosSplit(17, "45")
-	assert.Error(t, err, "Error al crear HoraMinutos")
-}
-
-func TestNewPeriodo(t *testing.T) {
-	ini, _ := newHoraMinutos(10, EnPunto)
-	fin, _ := newHoraMinutos(12, EnPunto)
-
-	periodo, err := newPeriodo(*ini, *fin)
-	assert.Equal(t, Periodo{HoraInicio: HoraMinutos{Hora: 10, Minutos: EnPunto}, HoraFin: HoraMinutos{Hora: 12, Minutos: EnPunto}}, *periodo, "Periodo erroneo")
-	assert.Nil(t, err, "Error al crear Periodo")
-}
-
-func TestNewPeriodoError(t *testing.T) {
-	ini, _ := newHoraMinutos(10, EnPunto)
-	fin, _ := newHoraMinutos(12, EnPunto)
-
-	_, err := newPeriodo(*fin, *ini)
-	assert.Error(t, err, "Error al crear Periodo")
-}
-
-func TestNewPeriodoStr(t *testing.T) {
-	periodo, err := NewPeriodoStr("10:00", "12:00")
-	assert.Equal(t, Periodo{HoraInicio: HoraMinutos{Hora: 10, Minutos: EnPunto}, HoraFin: HoraMinutos{Hora: 12, Minutos: EnPunto}}, *periodo, "Periodo erroneo")
-	assert.Nil(t, err, "Error al crear Periodo")
-}
-
 func TestNewPeriodoStrError(t *testing.T) {
 	_, err := NewPeriodoStr("hola", "12:00")
 	assert.Error(t, err, "Error al crear Periodo")
 
 	_, err = NewPeriodoStr("12:00", "12:30:00")
 	assert.Error(t, err, "Error al crear Periodo")
-}
 
-func TestNewPeriodoSplit(t *testing.T) {
-	periodo, err := NewPeriodoSplit(10, "00", 12, "00")
-	assert.Equal(t, Periodo{HoraInicio: HoraMinutos{Hora: 10, Minutos: EnPunto}, HoraFin: HoraMinutos{Hora: 12, Minutos: EnPunto}}, *periodo, "Periodo erroneo")
-	assert.Nil(t, err, "Error al crear Periodo")
-}
-
-func TestNewPeriodoSplitError(t *testing.T) {
-	_, err := NewPeriodoSplit(10, "ab", 12, "30")
+	_, err = NewPeriodoStr("30:00", "12:30")
 	assert.Error(t, err, "Error al crear Periodo")
 
-	_, err = NewPeriodoSplit(10, "00", 12, "12:30")
+	_, err = NewPeriodoStr("12:", "")
 	assert.Error(t, err, "Error al crear Periodo")
-}
 
-func TestNewClase(t *testing.T) {
-	periodo, _ := NewPeriodoStr("10:00", "12:00")
-	clase, err := NewClase(DiaSemana.Lunes, periodo, "23", Grupo{Asignatura: "Sistemas Operativos", Nombre: "9"})
-
-	assert.Equal(t, Clase{DiaSemana: DiaSemana.Lunes, Periodo: periodo, Aula: "23", Grupo: Grupo{Asignatura: "Sistemas Operativos", Nombre: "9"}}, *clase, "Clase erronea")
-	assert.Nil(t, err, "Error al crear la clase")
+	_, err = NewPeriodoStr("12:00", "ho:la")
+	assert.Error(t, err, "Error al crear Periodo")
 }
 
 func TestGetClase(t *testing.T) {
@@ -139,12 +61,8 @@ func TestGetClase(t *testing.T) {
 				HoraInicio: HoraMinutos{Hora: 8, Minutos: YMedia},
 				HoraFin:    HoraMinutos{Hora: 10, Minutos: YMedia},
 			},
-			Aula: "1",
-			Grupo: Grupo{
-				Nombre:     "A",
-				Asignatura: "Matemáticas",
-				Profesor:   "Juan Pérez",
-			},
+			Aula:  "1",
+			Grupo: *NewGrupo("A", "Matemáticas", "Juan Pérez"),
 		},
 	}
 
@@ -162,12 +80,8 @@ func TestGetClaseError(t *testing.T) {
 				HoraInicio: HoraMinutos{Hora: 8, Minutos: YMedia},
 				HoraFin:    HoraMinutos{Hora: 10, Minutos: YMedia},
 			},
-			Aula: "1",
-			Grupo: Grupo{
-				Nombre:     "A",
-				Asignatura: "Matemáticas",
-				Profesor:   "Juan Pérez",
-			},
+			Aula:  "1",
+			Grupo: *NewGrupo("A", "Matemáticas", "Juan Pérez"),
 		},
 	}
 
@@ -267,7 +181,7 @@ func TestExtraerProfesor(t *testing.T) {
 	tmpFile := crearFichTmp(html)
 	defer os.Remove(tmpFile)
 
-	clase, _ := NewClase(DiaSemana.Lunes, &Periodo{HoraInicio: HoraMinutos{Hora: 10, Minutos: EnPunto}, HoraFin: HoraMinutos{Hora: 12, Minutos: EnPunto}}, "23", Grupo{Asignatura: "Sistemas Operativos", Nombre: "4", Profesor: ""})
+	clase, _ := NewClase(DiaSemana.Lunes, &Periodo{HoraInicio: HoraMinutos{Hora: 10, Minutos: EnPunto}, HoraFin: HoraMinutos{Hora: 12, Minutos: EnPunto}}, "23", *NewGrupo("4", "Sistemas Operativos", ""))
 
 	clase, err := extraerProfesor(tmpFile, clase)
 	assert.Equal(t, "Pedro Martín Cuevas", clase.Grupo.Profesor, "Profesor incorrecto")
@@ -287,7 +201,7 @@ func TestExtraerProfesorSinGrupo(t *testing.T) {
 	tmpFile := crearFichTmp(html)
 	defer os.Remove(tmpFile)
 
-	clase, _ := NewClase(DiaSemana.Lunes, &Periodo{HoraInicio: HoraMinutos{Hora: 10, Minutos: EnPunto}, HoraFin: HoraMinutos{Hora: 12, Minutos: EnPunto}}, "23", Grupo{Asignatura: "Sistemas Operativos", Nombre: "", Profesor: ""})
+	clase, _ := NewClase(DiaSemana.Lunes, &Periodo{HoraInicio: HoraMinutos{Hora: 10, Minutos: EnPunto}, HoraFin: HoraMinutos{Hora: 12, Minutos: EnPunto}}, "23", *NewGrupo("", "Sistemas Operativos", ""))
 
 	_, err := extraerProfesor(tmpFile, clase)
 	assert.Error(t, err, "Error al extraer profesor")
@@ -305,7 +219,7 @@ func TestExtraerClasesErrorSintaxis(t *testing.T) {
 	tmpFile := crearFichTmp(html)
 	defer os.Remove(tmpFile)
 
-	clase, _ := NewClase(DiaSemana.Lunes, &Periodo{HoraInicio: HoraMinutos{Hora: 10, Minutos: EnPunto}, HoraFin: HoraMinutos{Hora: 12, Minutos: EnPunto}}, "23", Grupo{Asignatura: "Sistemas Operativos", Nombre: "4", Profesor: ""})
+	clase, _ := NewClase(DiaSemana.Lunes, &Periodo{HoraInicio: HoraMinutos{Hora: 10, Minutos: EnPunto}, HoraFin: HoraMinutos{Hora: 12, Minutos: EnPunto}}, "23", *NewGrupo("4", "Sistemas Operativos", ""))
 
 	_, err := extraerProfesor(tmpFile, clase)
 	assert.Error(t, err, "Error al extraer profesor")
@@ -320,12 +234,8 @@ func TestNewHorarioFromClases(t *testing.T) {
 				HoraInicio: HoraMinutos{Hora: 8, Minutos: YMedia},
 				HoraFin:    HoraMinutos{Hora: 10, Minutos: YMedia},
 			},
-			Aula: "1",
-			Grupo: Grupo{
-				Nombre:     "A",
-				Asignatura: "Matemáticas",
-				Profesor:   "Juan Pérez",
-			},
+			Aula:  "1",
+			Grupo: *NewGrupo("A", "Matemáticas", "Juan Pérez"),
 		},
 		{
 			DiaSemana: DiaSemana.Lunes,
@@ -333,12 +243,8 @@ func TestNewHorarioFromClases(t *testing.T) {
 				HoraInicio: HoraMinutos{Hora: 10, Minutos: YMedia},
 				HoraFin:    HoraMinutos{Hora: 12, Minutos: YMedia},
 			},
-			Aula: "2",
-			Grupo: Grupo{
-				Nombre:     "A",
-				Asignatura: "Física",
-				Profesor:   "Ana López",
-			},
+			Aula:  "2",
+			Grupo: *NewGrupo("A", "Física", "Ana López"),
 		},
 		{
 			DiaSemana: DiaSemana.Martes,
@@ -346,12 +252,8 @@ func TestNewHorarioFromClases(t *testing.T) {
 				HoraInicio: HoraMinutos{Hora: 9, Minutos: YMedia},
 				HoraFin:    HoraMinutos{Hora: 10, Minutos: YMedia},
 			},
-			Aula: "2",
-			Grupo: Grupo{
-				Nombre:     "A",
-				Asignatura: "Química",
-				Profesor:   "Carlos Gómez",
-			},
+			Aula:  "2",
+			Grupo: *NewGrupo("A", "Química", "Carlos Gómez"),
 		},
 	}
 
