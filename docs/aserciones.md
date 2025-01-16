@@ -6,15 +6,12 @@
 
 ## Opciones
 ### 1. [Testify](https://github.com/stretchr/testify)
-Aserciones avanzadas e inclusión de mocks (componentes que imitan el comportamiento real en un sistema).
 - Repositorio con casi 24k estrellas, y con [commits](https://github.com/stretchr/testify/commits/master/) recientes de hace unas semanas.
 
 ### 2. [Gomega](https://github.com/onsi/gomega)
-Enfocada en BDD y con posibilidad de crear aserciones personalizadas.
 - Repositorio con 2.2k estrellas, [commits](https://github.com/onsi/gomega/commits/master/) muy recientes.
 
 ### 3. [Check](https://github.com/go-check/check)
-Conjunto amplio de aserciones, con funciones avanzadas.
 - Repositorio con alrededor de 60 estrellas, sin [commits](https://github.com/go-check/check/commits/master/) desde hace varios años.
 
 ## Conclusión
