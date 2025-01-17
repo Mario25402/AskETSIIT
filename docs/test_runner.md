@@ -10,4 +10,4 @@ Existen otras herramientas que sustituyen a *go test*, la mayoría incluídas en
 
 Otras opciones que simulan el sistema de testing de Go como pueden ser `GoTestSum` y `RichGo`. La carácterística principal de estas herramientas es que añaden a la salida un *formateo* de la salida, añadiendo colores y una sintaxis más legible.
 
-<img src="./images/test_runners.pn" alt="Imagen"/>
+<img src="./images/test_runners.png" alt="Imagen"/>
