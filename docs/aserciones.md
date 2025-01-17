@@ -14,6 +14,9 @@
 ### 3. [Check](https://github.com/go-check/check)
 - Repositorio con alrededor de 60 estrellas, sin [commits](https://github.com/go-check/check/commits/master/) desde hace varios años.
 
+## Aclaración
+No se considera el [sistema de errores de *Go*](https://go.dev/doc/tutorial/handle-errors) porque aunque no añade dependencias externas (factor postivo), deberíamos manejar todos los casos de error de manera manual lo que añadiría mucho cigo repetido, una biblioteca simplifica el manejo y la claridad en este aspecto además de incluir opciones de testeo más avanzadas.
+
 ## Conclusión
 `Check` es una opción completa pero sin mantenimiento desde hace 5 años por lo que la catalogaremos como obsoleta y quedará descartada.
 
