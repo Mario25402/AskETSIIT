@@ -7,5 +7,4 @@ automatizar:
   fichero: makefile
   orden: make
   
-test:
-  - internal/models/horario_test.go
+test: ./internal/...
