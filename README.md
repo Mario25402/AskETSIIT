@@ -52,7 +52,7 @@ La aplicación ha sido *"dockerizada"* siguiendo las siguientes [herramientas](/
 
 Para ejecutar el contenedor usaremos:
 ```
-docker run mario24502/asketsiit:latest
+docker run -t -u 1001 -v `pwd`:/app/test mario24502/asketsiit:latest
 ```
 
 ## Extra
