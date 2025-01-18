@@ -6,6 +6,7 @@ on:
     - 'go.mod'
     - 'Makefile'
     - 'Dockerfile'
+    - '.github/workflows/*'
 
 jobs:
   build_publish:
