@@ -44,6 +44,15 @@ Para comprobar la sintaxis debemos usar:
 make check
 ```
 
+## Docker
+
+La aplicación ha sido *"dockerizada"* siguiendo las siguientes [herramientas](/docs/imagenes_docker.md).
+
+Para ejecutar el contenedor usaremos:
+```
+docker run mario24502/asketsiit:latest
+```
+
 ## Extra
 
 [Licencia](./LICENSE)
