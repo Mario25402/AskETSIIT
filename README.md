@@ -44,7 +44,7 @@ Para comprobar la sintaxis debemos usar:
 make check
 ```
 
-Respecto a la parte de testing, se ha optado por seguir los estándares del lenguaje utilizando [*Testing*](/docs/test_frameworks.md) en su combinación predeterminada con [*go test*](/docs/test_runner.md) y [*Testify*](/docs/aserciones.md) como biblioteca de aserciones.
+Respecto a la parte de testing, se ha optado por seguir los estándares del lenguaje utilizando [*Testing*](/docs/test_frameworks.md) en su combinación predeterminada con [*go test*](/docs/test_runner.md).
 
 Para ejecutar el testeo del código se usará:
 ```

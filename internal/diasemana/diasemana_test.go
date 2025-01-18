@@ -2,24 +2,48 @@ package DiaSemana
 
 import (
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
 func TestDiaStr(t *testing.T) {
-	assert.Equal(t, "1", DiaStr(Lunes), "Día erroneo")
-	assert.Equal(t, "2", DiaStr(Martes), "Día erroneo")
-	assert.Equal(t, "3", DiaStr(Miercoles), "Día erroneo")
-	assert.Equal(t, "4", DiaStr(Jueves), "Día erroneo")
-	assert.Equal(t, "5", DiaStr(Viernes), "Día erroneo")
-	assert.Equal(t, "", DiaStr(""), "Día erroneo")
+	tests := []struct {
+		dia      DiaSemana
+		expected string
+	}{
+		{Lunes, "1"},
+		{Martes, "2"},
+		{Miercoles, "3"},
+		{Jueves, "4"},
+		{Viernes, "5"},
+		{"", ""},
+	}
+
+	for _, test := range tests {
+		t.Run(test.expected, func(t *testing.T) {
+			if res := DiaStr(test.dia); res != test.expected {
+				t.Errorf("DiaStr(%v) = %v, want %v", test.dia, res, test.expected)
+			}
+		})
+	}
 }
 
 func TestStrDia(t *testing.T) {
-	assert.Equal(t, Lunes, StrDia("1"), "Día erroneo")
-	assert.Equal(t, Martes, StrDia("2"), "Día erroneo")
-	assert.Equal(t, Miercoles, StrDia("3"), "Día erroneo")
-	assert.Equal(t, Jueves, StrDia("4"), "Día erroneo")
-	assert.Equal(t, Viernes, StrDia("5"), "Día erroneo")
-	assert.Equal(t, DiaSemana(""), StrDia(""), "Día erroneo")
+	tests := []struct {
+		expected string
+		dia      DiaSemana
+	}{
+		{"1", Lunes},
+		{"2", Martes},
+		{"3", Miercoles},
+		{"4", Jueves},
+		{"5", Viernes},
+		{"", ""},
+	}
+
+	for _, test := range tests {
+		t.Run(test.expected, func(t *testing.T) {
+			if res := StrDia(test.expected); res != test.dia {
+				t.Errorf("StrDia(%v) = %v, want %v", test.expected, res, test.dia)
+			}
+		})
+	}
 }

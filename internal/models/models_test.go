@@ -4,8 +4,6 @@ import (
 	DiaSemana "askETSIIT/internal/diasemana"
 	"os"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
 func crearFichTmp(html string) string {
@@ -17,40 +15,60 @@ func crearFichTmp(html string) string {
 }
 func TestStrMinutos(t *testing.T) {
 	minutos, err := strMinutos("00")
-	assert.Nil(t, err, "Error al obtener los minutos")
-	assert.Equal(t, EnPunto, minutos, "Minutos erroneos")
+	if err != nil {
+		t.Fatalf("Error inesperado al obtener los minutos: %v", err)
+	}
+	if minutos != EnPunto {
+		t.Errorf("Minutos incorrectos: se esperaba %v, se obtuvo %v", EnPunto, minutos)
+	}
 
 	minutos, err = strMinutos("30")
-	assert.Nil(t, err, "Error al obtener los minutos")
-	assert.Equal(t, YMedia, minutos, "Minutos erroneos")
+	if err != nil {
+		t.Fatalf("Error inesperado al obtener los minutos: %v", err)
+	}
+	if minutos != YMedia {
+		t.Errorf("Minutos incorrectos: se esperaba %v, se obtuvo %v", YMedia, minutos)
+	}
 }
 
 func TestStrMinutosError(t *testing.T) {
 	_, err := strMinutos("45")
-	assert.Error(t, err, "Error al obtener los minutos")
+	if err == nil {
+		t.Errorf("Se esperaba un error al obtener los minutos, pero no se produjo ninguno")
+	}
 }
 
 func TestMinutosStr(t *testing.T) {
-	assert.Equal(t, "00", minutosStr(EnPunto), "Minutos erroneos")
-	assert.Equal(t, "30", minutosStr(YMedia), "Minutos erroneos")
-	assert.Equal(t, "", minutosStr("hola"), "Minutos erroneos")
+	if minutosStr(EnPunto) != "00" {
+		t.Errorf("Minutos incorrectos: se esperaba %v, se obtuvo %v", "00", minutosStr(EnPunto))
+	}
+	if minutosStr(YMedia) != "30" {
+		t.Errorf("Minutos incorrectos: se esperaba %v, se obtuvo %v", "30", minutosStr(YMedia))
+	}
+	if minutosStr("hola") != "" {
+		t.Errorf("Minutos incorrectos: se esperaba %v, se obtuvo %v", "", minutosStr("hola"))
+	}
 }
 
 func TestNewPeriodoStrError(t *testing.T) {
-	_, err := NewPeriodoStr("hola", "12:00")
-	assert.Error(t, err, "Error al crear Periodo")
+	pruebas := []struct {
+		inicio  string
+		fin     string
+		mensaje string
+	}{
+		{"hola", "12:00", "Inicio inválido"},
+		{"12:00", "12:30:00", "Formato inválido de fin"},
+		{"30:00", "12:30", "Hora inicial inválida"},
+		{"12:", "", "Formato incompleto"},
+		{"12:00", "ho:la", "Hora final inválida"},
+	}
 
-	_, err = NewPeriodoStr("12:00", "12:30:00")
-	assert.Error(t, err, "Error al crear Periodo")
-
-	_, err = NewPeriodoStr("30:00", "12:30")
-	assert.Error(t, err, "Error al crear Periodo")
-
-	_, err = NewPeriodoStr("12:", "")
-	assert.Error(t, err, "Error al crear Periodo")
-
-	_, err = NewPeriodoStr("12:00", "ho:la")
-	assert.Error(t, err, "Error al crear Periodo")
+	for _, prueba := range pruebas {
+		_, err := NewPeriodoStr(prueba.inicio, prueba.fin)
+		if err == nil {
+			t.Errorf("Se esperaba un error para el caso %q -> %q, pero no se produjo ninguno", prueba.inicio, prueba.fin)
+		}
+	}
 }
 
 func TestGetClase(t *testing.T) {
@@ -69,7 +87,12 @@ func TestGetClase(t *testing.T) {
 	horario := NewHorarioFromClases(clases)
 	lunes := horario.GetClase("Lunes", "08:30")
 
-	assert.Equal(t, clases[0], *lunes, "Día incorrecto")
+	if lunes == nil {
+		t.Fatalf("No se encontró la clase esperada")
+	}
+	if *lunes != clases[0] {
+		t.Errorf("Clase incorrecta: se esperaba %+v, se obtuvo %+v", clases[0], *lunes)
+	}
 }
 
 func TestGetClaseError(t *testing.T) {
@@ -88,7 +111,9 @@ func TestGetClaseError(t *testing.T) {
 	horario := NewHorarioFromClases(clases)
 	lunes := horario.GetClase("Lunes", "incorrecto")
 
-	assert.Nil(t, lunes, "Clase incorrecta")
+	if lunes != nil {
+		t.Errorf("Se esperaba nil, pero se obtuvo %+v", *lunes)
+	}
 }
 
 func TestExtraerClases(t *testing.T) {
@@ -111,15 +136,33 @@ func TestExtraerClases(t *testing.T) {
 	defer os.Remove(tmpFile)
 
 	clases, err := extraerClases(tmpFile)
-	assert.Nil(t, err, "Error al extraer las clases")
-	assert.Len(t, *clases, 1, "Número incorrecto de clases")
+	if err != nil {
+		t.Fatalf("Error inesperado al extraer las clases: %v", err)
+	}
 
-	assert.Equal(t, "Sistemas Operativos", (*clases)[0].Grupo.Asignatura, "Asignatura incorrecta")
-	assert.Equal(t, DiaSemana.Lunes, (*clases)[0].DiaSemana, "Día incorrecto")
-	assert.Equal(t, "9", (*clases)[0].Grupo.Nombre, "Grupo incorrecto")
-	assert.Equal(t, "23", (*clases)[0].Aula, "Aula incorrecta")
-	assert.Equal(t, "9:30", GetHoraMinutosStr(&(*clases)[0].Periodo.HoraInicio), "Hora de inicio incorrecta")
-	assert.Equal(t, "11:30", GetHoraMinutosStr(&(*clases)[0].Periodo.HoraFin), "Hora de fin incorrecta")
+	if len(*clases) != 1 {
+		t.Errorf("Número incorrecto de clases: se esperaba 1, se obtuvo %d", len(*clases))
+	}
+
+	clase := (*clases)[0]
+	if clase.Grupo.Asignatura != "Sistemas Operativos" {
+		t.Errorf("Asignatura incorrecta: se esperaba %q, se obtuvo %q", "Sistemas Operativos", clase.Grupo.Asignatura)
+	}
+	if clase.DiaSemana != DiaSemana.Lunes {
+		t.Errorf("Día incorrecto: se esperaba %v, se obtuvo %v", DiaSemana.Lunes, clase.DiaSemana)
+	}
+	if clase.Grupo.Nombre != "9" {
+		t.Errorf("Grupo incorrecto: se esperaba %q, se obtuvo %q", "9", clase.Grupo.Nombre)
+	}
+	if clase.Aula != "23" {
+		t.Errorf("Aula incorrecta: se esperaba %q, se obtuvo %q", "23", clase.Aula)
+	}
+	if GetHoraMinutosStr(&clase.Periodo.HoraInicio) != "9:30" {
+		t.Errorf("Hora de inicio incorrecta: se esperaba %q, se obtuvo %q", "9:30", GetHoraMinutosStr(&clase.Periodo.HoraInicio))
+	}
+	if GetHoraMinutosStr(&clase.Periodo.HoraFin) != "11:30" {
+		t.Errorf("Hora de fin incorrecta: se esperaba %q, se obtuvo %q", "11:30", GetHoraMinutosStr(&clase.Periodo.HoraFin))
+	}
 }
 
 func TestExtraerClasesErrorDia(t *testing.T) {
@@ -142,7 +185,9 @@ func TestExtraerClasesErrorDia(t *testing.T) {
 	defer os.Remove(tmpFile)
 
 	_, err := extraerClases(tmpFile)
-	assert.Error(t, err, "Día incorrecto")
+	if err == nil {
+		t.Errorf("Se esperaba un error por día incorrecto, pero no se produjo ninguno")
+	}
 }
 
 func TestExtraerClasesErrorPeriodo(t *testing.T) {
@@ -165,7 +210,9 @@ func TestExtraerClasesErrorPeriodo(t *testing.T) {
 	defer os.Remove(tmpFile)
 
 	_, err := extraerClases(tmpFile)
-	assert.Error(t, err, "Periodo incorrecto")
+	if err == nil {
+		t.Errorf("Se esperaba un error por periodo incorrecto, pero no se produjo ninguno")
+	}
 }
 
 func TestExtraerProfesor(t *testing.T) {
@@ -184,8 +231,13 @@ func TestExtraerProfesor(t *testing.T) {
 	clase, _ := NewClase(DiaSemana.Lunes, &Periodo{HoraInicio: HoraMinutos{Hora: 10, Minutos: EnPunto}, HoraFin: HoraMinutos{Hora: 12, Minutos: EnPunto}}, "23", *NewGrupo("4", "Sistemas Operativos", ""))
 
 	clase, err := extraerProfesor(tmpFile, clase)
-	assert.Equal(t, "Pedro Martín Cuevas", clase.Grupo.Profesor, "Profesor incorrecto")
-	assert.Nil(t, err, "Error al extraer profesor")
+	if err != nil {
+		t.Fatalf("Error inesperado al extraer profesor: %v", err)
+	}
+
+	if clase.Grupo.Profesor != "Pedro Martín Cuevas" {
+		t.Errorf("Profesor incorrecto: se esperaba %q, se obtuvo %q", "Pedro Martín Cuevas", clase.Grupo.Profesor)
+	}
 }
 
 func TestExtraerProfesorSinGrupo(t *testing.T) {
@@ -204,7 +256,9 @@ func TestExtraerProfesorSinGrupo(t *testing.T) {
 	clase, _ := NewClase(DiaSemana.Lunes, &Periodo{HoraInicio: HoraMinutos{Hora: 10, Minutos: EnPunto}, HoraFin: HoraMinutos{Hora: 12, Minutos: EnPunto}}, "23", *NewGrupo("", "Sistemas Operativos", ""))
 
 	_, err := extraerProfesor(tmpFile, clase)
-	assert.Error(t, err, "Error al extraer profesor")
+	if err == nil {
+		t.Errorf("Se esperaba un error al extraer profesor, pero no se produjo ninguno")
+	}
 }
 
 func TestExtraerClasesErrorSintaxis(t *testing.T) {
@@ -222,7 +276,9 @@ func TestExtraerClasesErrorSintaxis(t *testing.T) {
 	clase, _ := NewClase(DiaSemana.Lunes, &Periodo{HoraInicio: HoraMinutos{Hora: 10, Minutos: EnPunto}, HoraFin: HoraMinutos{Hora: 12, Minutos: EnPunto}}, "23", *NewGrupo("4", "Sistemas Operativos", ""))
 
 	_, err := extraerProfesor(tmpFile, clase)
-	assert.Error(t, err, "Error al extraer profesor")
+	if err == nil {
+		t.Errorf("Se esperaba un error al extraer profesor del fichero malformado, pero no se produjo ninguno")
+	}
 }
 
 func TestNewHorarioFromClases(t *testing.T) {
@@ -258,18 +314,26 @@ func TestNewHorarioFromClases(t *testing.T) {
 	}
 
 	horario := NewHorarioFromClases(clases)
-	assert.NotNil(t, horario, "El horario no debería ser nulo")
 
-	assert.Len(t, horario.Clases[DiaSemana.Lunes], 2, "Debería haber 2 clase el lunes")
-	assert.Equal(t, "1", horario.GetClase("Lunes", "8:30").Aula)
-	assert.Equal(t, "Juan Pérez", horario.GetClase("Lunes", "8:30").Grupo.Profesor)
+	if len(horario.Clases[DiaSemana.Lunes]) != 2 {
+		t.Errorf("Número incorrecto de clases el lunes: se esperaba %d, se obtuvo %d", 2, len(horario.Clases[DiaSemana.Lunes]))
+	}
 
-	assert.Equal(t, "2", horario.GetClase("Lunes", "10:30").Aula)
-	assert.Equal(t, "Ana López", horario.GetClase("Lunes", "10:30").Grupo.Profesor)
+	if clase := horario.GetClase("Lunes", "8:30"); clase.Aula != "1" || clase.Grupo.Profesor != "Juan Pérez" {
+		t.Errorf("Clase incorrecta para las 8:30 del lunes: Aula esperada %q, Profesor esperado %q", "1", "Juan Pérez")
+	}
 
-	assert.Len(t, horario.Clases[DiaSemana.Martes], 1, "Debería haber 1 clase el martes")
-	assert.Equal(t, "2", horario.GetClase("Martes", "9:30").Aula)
-	assert.Equal(t, "Carlos Gómez", horario.GetClase("Martes", "9:30").Grupo.Profesor)
+	if clase := horario.GetClase("Lunes", "10:30"); clase.Aula != "2" || clase.Grupo.Profesor != "Ana López" {
+		t.Errorf("Clase incorrecta para las 10:30 del lunes: Aula esperada %q, Profesor esperado %q", "2", "Ana López")
+	}
+
+	if len(horario.Clases[DiaSemana.Martes]) != 1 {
+		t.Errorf("Número incorrecto de clases el martes: se esperaba %d, se obtuvo %d", 1, len(horario.Clases[DiaSemana.Martes]))
+	}
+
+	if clase := horario.GetClase("Martes", "9:30"); clase.Aula != "2" || clase.Grupo.Profesor != "Carlos Gómez" {
+		t.Errorf("Clase incorrecta para las 9:30 del martes: Aula esperada %q, Profesor esperado %q", "2", "Carlos Gómez")
+	}
 }
 
 func TestExtraerHorarioFromFile(t *testing.T) {
@@ -303,8 +367,9 @@ func TestExtraerHorarioFromFile(t *testing.T) {
 	defer os.Remove(tmpFile)
 
 	horario := NewHorarioFromFile(tmpFile)
-	assert.NotNil(t, horario, "Error al extraer el horario")
-	assert.Len(t, horario.Clases[DiaSemana.Lunes], 1, "Número incorrecto de clases")
+	if len(horario.Clases[DiaSemana.Lunes]) != 1 {
+		t.Errorf("Número incorrecto de clases: se esperaba %d, se obtuvo %d", 1, len(horario.Clases[DiaSemana.Lunes]))
+	}
 }
 
 func TestExtraerHorarioFromFileErrorProfesor(t *testing.T) {
@@ -328,7 +393,9 @@ func TestExtraerHorarioFromFileErrorProfesor(t *testing.T) {
 	defer os.Remove(tmpFile)
 
 	horario := NewHorarioFromFile(tmpFile)
-	assert.Nil(t, horario, "Error al extraer el profesor")
+	if horario != nil {
+		t.Errorf("Se esperaba un horario nulo debido a la falta de un profesor, pero se obtuvo: %+v", horario)
+	}
 }
 
 func TestExtraerHorarioFromFileErrorClases(t *testing.T) {
@@ -338,5 +405,7 @@ func TestExtraerHorarioFromFileErrorClases(t *testing.T) {
 	defer os.Remove(tmpFile)
 
 	horario := NewHorarioFromFile(tmpFile)
-	assert.Nil(t, horario, "Error al extraer las clases")
+	if horario != nil {
+		t.Errorf("Se esperaba un horario nulo debido a la falta de un profesor, pero se obtuvo: %+v", horario)
+	}
 }
