@@ -1,6 +1,6 @@
 # Imágenes Docker
 ## Requisitos de aceptación
-- **Mantenimiento**: Que una imágen se mantenga actulizada es importante para éstar a la última de las novedades y sin riesgo de producir una deuda técnica futura, además de reducir posibles brechas de seguridad.
+- **Mantenimiento**: Que una imagen se mantenga actualizada es importante para estar a la última de las novedades y sin riesgo de producir una deuda técnica futura, además de reducir posibles brechas de seguridad.
     - Se valorará que tenga actualizaciones recientes.
 
 - **Tamaño**: Por norma general una imagen pequeña estará más enfocada y será más eficiente que una de mayor tamaño.
