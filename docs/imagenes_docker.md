@@ -11,7 +11,7 @@
 
 ## Opciones
 ### **[Golang](https://hub.docker.com/_/golang)**
-Su versión BookWorm basada en Debian 11, cuenta con 58 vulnerabilidades registradas. La versión BullsEye no se escogió debido que esta basada en Debian 10 por lo que es preferible usar una versión más reciente.
+Su versión BookWorm basada en Debian 12, cuenta con 58 vulnerabilidades registradas. La versión BullsEye no se escogió debido que esta basada en Debian 11 por lo que es preferible usar una versión más reciente.
 - Última actualización hace horas.
 - Tamaño base de 288.23MB.
 - Make instalado: *Y*.
