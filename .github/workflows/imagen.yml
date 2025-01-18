@@ -9,7 +9,7 @@ on:
 
 jobs:
   build_publish:
-    runs-on: apline-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
