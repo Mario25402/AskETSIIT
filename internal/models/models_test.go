@@ -148,8 +148,8 @@ func TestExtraerClases(t *testing.T) {
 	if clase.Grupo.Asignatura != "Sistemas Operativos" {
 		t.Errorf("Asignatura incorrecta: se esperaba %q, se obtuvo %q", "Sistemas Operativos", clase.Grupo.Asignatura)
 	}
-	if clase.DiaSemana != DiaSemana.Lunes {
-		t.Errorf("Día incorrecto: se esperaba %v, se obtuvo %v", DiaSemana.Lunes, clase.DiaSemana)
+	if clase.DiaSemana != "1" {
+		t.Errorf("Día incorrecto: se esperaba %v, se obtuvo %v", "1", clase.DiaSemana)
 	}
 	if clase.Grupo.Nombre != "9" {
 		t.Errorf("Grupo incorrecto: se esperaba %q, se obtuvo %q", "9", clase.Grupo.Nombre)
