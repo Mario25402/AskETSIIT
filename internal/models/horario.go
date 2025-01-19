@@ -48,7 +48,7 @@ func procesadorClase(dia *DiaSemana.DiaSemana, asignatura, grupo, aula *string, 
 			return nil
 		},
 		regexp.MustCompile(`<div class=\"clase dia-(\d)\"`): func(matches []string) error {
-			*dia = DiaSemana.StrDia(matches[1])
+			*dia = DiaSemana.DiaSemana(matches[1])
 			if *dia == "" {
 				return errors.New("dia no válido")
 			}
