@@ -50,10 +50,16 @@ make test
 ## Docker
 La aplicación ha sido *"dockerizada"* siguiendo las siguientes [herramientas](/docs/imagenes_docker.md).
 
-Para ejecutar el contenedor usaremos:
+Para ejecutar el contenedor de Docker Hub usaremos:
 ```
 docker run -t -u 1001 -v `pwd`:/app/test mario24502/asketsiit:latest
 ```
+
+Si queremos usar una vesión en local, ejecutaremos (motaje y ejecución respectivamente):
+
+docker build -t prueba .
+
+docker run -t -u 1001 -v `pwd`:/app/test prueba
 
 ## Extra
 [Licencia](./LICENSE)
