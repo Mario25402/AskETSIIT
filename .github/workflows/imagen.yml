@@ -3,8 +3,6 @@ name: AskETSIIT Image
 on:
   push:
     paths:
-    - 'go.mod'
-    - 'Makefile'
     - 'Dockerfile'
 
 jobs:
