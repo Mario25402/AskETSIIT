@@ -9,15 +9,12 @@ RUN apk update \
     && rm go1.23.4.linux-amd64.tar.gz
 
 ENV PATH=$PATH:/usr/local/go/bin
-ENV GOCACHE=/app/test/.cache
+ENV GOCACHE=/home/tests/.cache
 
-RUN mkdir -p /app/test/.cache
+RUN adduser -D -h /home/tests tests \
+    && mkdir -p /home/tests/.cache \
+    && chmod -R a+w /home/tests/.cache
 
-ARG USER_ID
-RUN if [ -z "$USER_ID" ]; then USER_ID=1001; fi \
-    && adduser -D -u $USER_ID dynamicuser \
-    && chown -R $USER_ID:$USER_ID /app/test
-
-USER dynamicuser
+USER tests
 
 ENTRYPOINT [ "make", "test" ]
