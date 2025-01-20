@@ -209,14 +209,13 @@ func NewHorarioFromFile(file string) *Horario {
 		return nil
 	}
 
-	for i, clase := range *clases {
-		var _ *Clase = &clase
+	for iteracion, clase := range *clases {
 		err := extraerProfesor(&clase, file)
 		if err != nil {
 			return nil
 		}
 
-		(*clases)[i] = clase
+		(*clases)[iteracion] = clase
 	}
 
 	horario := NewHorarioFromClases(*clases)
