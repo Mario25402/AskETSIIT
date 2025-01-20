@@ -28,7 +28,7 @@ Se va a utilizar [Go Modules](https://go.dev/ref/mod), el gestor oficial de los 
 Se va a utilizar [Make](https://www.gnu.org/software/make/manual/make.html) como gestor por su gran capacidad y resultados.
 Se deberá crear el archivo *"makefile"* el cual editaremos con las configuraciones que necesarias.
 
-## Ordenes
+## Órdenes
 
 El fichero que contiene la declaración de "Horario" será el que implemente la lógica de negocio ya que sobre él recae el procesamiento principal del proyecto.
 
