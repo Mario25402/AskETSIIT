@@ -13,44 +13,19 @@ const (
 	YMedia  MinutosPosibles = "Y Media"
 )
 
-func strMinutos(mins string) (MinutosPosibles, error) {
-	if mins == "00" {
-		return EnPunto, nil
-	} else if mins == "30" {
-		return YMedia, nil
-	} else {
-		return "", errors.New("los minutos deben ser 00 o 30")
-	}
-}
-
-func minutosStr(mins MinutosPosibles) string {
-	if mins == EnPunto {
-		return "00"
-	} else if mins == YMedia {
-		return "30"
-	} else {
-		return ""
-	}
-}
+const (
+	HoraInicioDia = 0
+	HoraFinDia    = 23
+)
 
 type HoraMinutos struct {
 	Hora    int // 0-23
 	Minutos MinutosPosibles
 }
 
-func GetHoraMinutosStr(hm *HoraMinutos) string {
-	return strconv.Itoa(hm.Hora) + ":" + minutosStr(hm.Minutos)
-}
-
-func newHoraMinutos(horas int, mins MinutosPosibles) (*HoraMinutos, error) {
-	if horas < 0 || horas > 23 {
-		return nil, errors.New("la hora debe estar entre 0 y 23")
-	}
-	return &HoraMinutos{Hora: horas, Minutos: mins}, nil
-}
-
-func NewHoraMinutosStr(tiempo string) (*HoraMinutos, error) {
+func newHoraMinutos(tiempo string) (*HoraMinutos, error) {
 	partes := strings.Split(tiempo, ":")
+
 	if len(partes) != 2 {
 		return nil, errors.New("la hora debe tener el formato HH:MM")
 	}
@@ -60,16 +35,21 @@ func NewHoraMinutosStr(tiempo string) (*HoraMinutos, error) {
 		return nil, err
 	}
 
-	return NewHoraMinutosSplit(horas, partes[1])
-}
-
-func NewHoraMinutosSplit(horas int, mins string) (*HoraMinutos, error) {
-	minutos, err := strMinutos(mins)
-	if err != nil {
-		return nil, err
+	if horas < HoraInicioDia || horas > HoraFinDia {
+		return nil, errors.New("la hora debe estar entre 0 y 23")
 	}
 
-	return newHoraMinutos(horas, minutos)
+	var minutos MinutosPosibles
+
+	if partes[1] == "00" {
+		minutos = EnPunto
+	} else if partes[1] == "30" {
+		minutos = YMedia
+	} else {
+		return nil, errors.New("los minutos deben ser 00 o 30")
+	}
+
+	return &HoraMinutos{Hora: horas, Minutos: minutos}, nil
 }
 
 type Periodo struct {
@@ -77,24 +57,20 @@ type Periodo struct {
 	HoraFin    HoraMinutos
 }
 
-func newPeriodo(horaInicio, horaFinal HoraMinutos) (*Periodo, error) {
-	if horaInicio.Hora > horaFinal.Hora || (horaInicio.Hora == horaFinal.Hora && horaInicio.Minutos > horaFinal.Minutos) {
+func newPeriodo(tiempoInicio, tiempoFinal string) (*Periodo, error) {
+	ini, err := newHoraMinutos(tiempoInicio)
+	if err != nil {
+		return nil, err
+	}
+
+	fin, err := newHoraMinutos(tiempoFinal)
+	if err != nil {
+		return nil, err
+	}
+
+	if ini.Hora > fin.Hora || (ini.Hora == fin.Hora && ini.Minutos > fin.Minutos) {
 		return nil, errors.New("la hora de inicio debe ser anterior a la hora de fin")
 	}
 
-	return &Periodo{HoraInicio: horaInicio, HoraFin: horaFinal}, nil
-}
-
-func NewPeriodoStr(tiempoInicio, tiempoFinal string) (*Periodo, error) {
-	ini, err := NewHoraMinutosStr(tiempoInicio)
-	if err != nil {
-		return nil, err
-	}
-
-	fin, err := NewHoraMinutosStr(tiempoFinal)
-	if err != nil {
-		return nil, err
-	}
-
-	return newPeriodo(*ini, *fin)
+	return &Periodo{HoraInicio: *ini, HoraFin: *fin}, nil
 }

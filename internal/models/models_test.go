@@ -5,43 +5,6 @@ import (
 	"testing"
 )
 
-func TestStrMinutos(t *testing.T) {
-	minutos, err := strMinutos("00")
-	if err != nil {
-		t.Fatalf("Error inesperado al obtener los minutos: %v", err)
-	}
-	if minutos != EnPunto {
-		t.Errorf("Minutos incorrectos: se esperaba %v, se obtuvo %v", EnPunto, minutos)
-	}
-
-	minutos, err = strMinutos("30")
-	if err != nil {
-		t.Fatalf("Error inesperado al obtener los minutos: %v", err)
-	}
-	if minutos != YMedia {
-		t.Errorf("Minutos incorrectos: se esperaba %v, se obtuvo %v", YMedia, minutos)
-	}
-}
-
-func TestStrMinutosError(t *testing.T) {
-	_, err := strMinutos("45")
-	if err == nil {
-		t.Errorf("Se esperaba un error al obtener los minutos, pero no se produjo ninguno")
-	}
-}
-
-func TestMinutosStr(t *testing.T) {
-	if minutosStr(EnPunto) != "00" {
-		t.Errorf("Minutos incorrectos: se esperaba %v, se obtuvo %v", "00", minutosStr(EnPunto))
-	}
-	if minutosStr(YMedia) != "30" {
-		t.Errorf("Minutos incorrectos: se esperaba %v, se obtuvo %v", "30", minutosStr(YMedia))
-	}
-	if minutosStr("hola") != "" {
-		t.Errorf("Minutos incorrectos: se esperaba %v, se obtuvo %v", "", minutosStr("hola"))
-	}
-}
-
 func TestNewPeriodoStrError(t *testing.T) {
 	pruebas := []struct {
 		inicio  string
@@ -56,7 +19,7 @@ func TestNewPeriodoStrError(t *testing.T) {
 	}
 
 	for _, prueba := range pruebas {
-		_, err := NewPeriodoStr(prueba.inicio, prueba.fin)
+		_, err := newPeriodo(prueba.inicio, prueba.fin)
 		if err == nil {
 			t.Errorf("Se esperaba un error para el caso %q -> %q, pero no se produjo ninguno", prueba.inicio, prueba.fin)
 		}
@@ -72,7 +35,7 @@ func TestGetClase(t *testing.T) {
 				HoraFin:    HoraMinutos{Hora: 10, Minutos: YMedia},
 			},
 			Aula:  "1",
-			Grupo: *NewGrupo("A", "Matemáticas", "Juan Pérez"),
+			Grupo: Grupo{"A", "Matemáticas", "Juan Pérez"},
 		},
 	}
 
@@ -122,7 +85,7 @@ func TestGetClaseError(t *testing.T) {
 				HoraFin:    HoraMinutos{Hora: 10, Minutos: YMedia},
 			},
 			Aula:  "1",
-			Grupo: *NewGrupo("A", "Matemáticas", "Juan Pérez"),
+			Grupo: Grupo{"A", "Matemáticas", "Juan Pérez"},
 		},
 	}
 
@@ -143,7 +106,7 @@ func TestGetDia(t *testing.T) {
 				HoraFin:    HoraMinutos{Hora: 10, Minutos: YMedia},
 			},
 			Aula:  "1",
-			Grupo: *NewGrupo("A", "Matemáticas", "Juan Pérez"),
+			Grupo: Grupo{"A", "Matemáticas", "Juan Pérez"},
 		},
 		{
 			DiaSemana: DiaSemana.Lunes,
@@ -152,7 +115,7 @@ func TestGetDia(t *testing.T) {
 				HoraFin:    HoraMinutos{Hora: 12, Minutos: YMedia},
 			},
 			Aula:  "1",
-			Grupo: *NewGrupo("A", "Física", "Ana López"),
+			Grupo: Grupo{"A", "Física", "Ana López"},
 		},
 	}
 
@@ -173,7 +136,7 @@ func TestGetDiaError(t *testing.T) {
 				HoraFin:    HoraMinutos{Hora: 10, Minutos: YMedia},
 			},
 			Aula:  "1",
-			Grupo: *NewGrupo("A", "Matemáticas", "Juan Pérez"),
+			Grupo: Grupo{"A", "Matemáticas", "Juan Pérez"},
 		},
 	}
 
@@ -214,7 +177,7 @@ func TestExtraerClasesErrorPeriodo(t *testing.T) {
 }
 
 func TestExtraerProfesor(t *testing.T) {
-	clase, _ := NewClase(DiaSemana.Lunes, &Periodo{HoraInicio: HoraMinutos{Hora: 10, Minutos: EnPunto}, HoraFin: HoraMinutos{Hora: 12, Minutos: EnPunto}}, "23", *NewGrupo("4", "Sistemas Operativos", ""))
+	clase, _ := NewClase(DiaSemana.Lunes, &Periodo{HoraInicio: HoraMinutos{Hora: 10, Minutos: EnPunto}, HoraFin: HoraMinutos{Hora: 12, Minutos: EnPunto}}, "23", Grupo{"4", "Sistemas Operativos", ""})
 
 	err := extraerProfesor(clase, "../../docs/fuentes/correcto.html")
 	if err != nil {
@@ -227,7 +190,7 @@ func TestExtraerProfesor(t *testing.T) {
 }
 
 func TestExtraerProfesorSinGrupo(t *testing.T) {
-	clase, _ := NewClase(DiaSemana.Lunes, &Periodo{HoraInicio: HoraMinutos{Hora: 10, Minutos: EnPunto}, HoraFin: HoraMinutos{Hora: 12, Minutos: EnPunto}}, "23", *NewGrupo("", "Sistemas Operativos", ""))
+	clase, _ := NewClase(DiaSemana.Lunes, &Periodo{HoraInicio: HoraMinutos{Hora: 10, Minutos: EnPunto}, HoraFin: HoraMinutos{Hora: 12, Minutos: EnPunto}}, "23", Grupo{"", "Sistemas Operativos", ""})
 
 	err := extraerProfesor(clase, "../../docs/fuentes/correcto.html")
 	if err == nil {
@@ -236,7 +199,7 @@ func TestExtraerProfesorSinGrupo(t *testing.T) {
 }
 
 func TestExtraerClasesErrorSintaxis(t *testing.T) {
-	clase, _ := NewClase(DiaSemana.Lunes, &Periodo{HoraInicio: HoraMinutos{Hora: 10, Minutos: EnPunto}, HoraFin: HoraMinutos{Hora: 12, Minutos: EnPunto}}, "23", *NewGrupo("4", "Sistemas Operativos", ""))
+	clase, _ := NewClase(DiaSemana.Lunes, &Periodo{HoraInicio: HoraMinutos{Hora: 10, Minutos: EnPunto}, HoraFin: HoraMinutos{Hora: 12, Minutos: EnPunto}}, "23", Grupo{"4", "Sistemas Operativos", ""})
 	err := extraerProfesor(clase, "../../docs/fuentes/errorSintaxisGrupo.html")
 
 	if err == nil {
@@ -253,7 +216,7 @@ func TestNewHorarioFromClases(t *testing.T) {
 				HoraFin:    HoraMinutos{Hora: 10, Minutos: YMedia},
 			},
 			Aula:  "1",
-			Grupo: *NewGrupo("A", "Matemáticas", "Juan Pérez"),
+			Grupo: Grupo{"A", "Matemáticas", "Juan Pérez"},
 		},
 		{
 			DiaSemana: DiaSemana.Martes,
@@ -262,7 +225,7 @@ func TestNewHorarioFromClases(t *testing.T) {
 				HoraFin:    HoraMinutos{Hora: 10, Minutos: YMedia},
 			},
 			Aula:  "2",
-			Grupo: *NewGrupo("A", "Química", "Carlos Gómez"),
+			Grupo: Grupo{"A", "Química", "Carlos Gómez"},
 		},
 		{
 			DiaSemana: DiaSemana.Lunes,
@@ -271,7 +234,7 @@ func TestNewHorarioFromClases(t *testing.T) {
 				HoraFin:    HoraMinutos{Hora: 12, Minutos: YMedia},
 			},
 			Aula:  "2",
-			Grupo: *NewGrupo("A", "Física", "Ana López"),
+			Grupo: Grupo{"A", "Física", "Ana López"},
 		},
 	}
 

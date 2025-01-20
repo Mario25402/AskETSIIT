@@ -9,7 +9,3 @@ type Grupo struct {
 func (grupo *Grupo) setProfesor(prof string) {
 	grupo.Profesor = prof
 }
-
-func NewGrupo(nombre, asignatura, profesor string) *Grupo {
-	return &Grupo{Nombre: nombre, Asignatura: asignatura, Profesor: profesor}
-}

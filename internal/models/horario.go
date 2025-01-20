@@ -14,7 +14,7 @@ type Horario struct {
 }
 
 func (horario Horario) GetClase(dia DiaSemana.DiaSemana, hora string) *Clase {
-	time, err := NewHoraMinutosStr(hora)
+	time, err := newHoraMinutos(hora)
 	if err != nil {
 		return nil
 	}
@@ -89,7 +89,7 @@ func procesarPeriodo(linea string, periodo **Periodo) {
 	expPeriodo := regexp.MustCompile(`<div>Horario:\s*De\s*(\d{2}:\d{2})\s*a\s*(\d{2}:\d{2})</div>`)
 
 	if matches := expPeriodo.FindStringSubmatch(linea); matches != nil {
-		newPeriodo, err := NewPeriodoStr(matches[1], matches[2])
+		newPeriodo, err := newPeriodo(matches[1], matches[2])
 		if err != nil {
 			return
 		}
