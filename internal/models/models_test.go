@@ -39,7 +39,7 @@ func TestGetClase(t *testing.T) {
 		},
 	}
 
-	horario := NewHorarioFromClases(clases)
+	horario := newHorarioFromClases(clases)
 	lunes := horario.GetClase("Lunes", "08:30")
 
 	if lunes == nil {
@@ -89,7 +89,7 @@ func TestGetClaseError(t *testing.T) {
 		},
 	}
 
-	horario := NewHorarioFromClases(clases)
+	horario := newHorarioFromClases(clases)
 	lunes := horario.GetClase("Lunes", "incorrecto")
 
 	if lunes != nil {
@@ -119,7 +119,7 @@ func TestGetDia(t *testing.T) {
 		},
 	}
 
-	horario := NewHorarioFromClases(clases)
+	horario := newHorarioFromClases(clases)
 	lunes := horario.GetDia("Lunes")
 
 	if len(lunes) != 2 {
@@ -140,7 +140,7 @@ func TestGetDiaError(t *testing.T) {
 		},
 	}
 
-	horario := NewHorarioFromClases(clases)
+	horario := newHorarioFromClases(clases)
 	lunes := horario.GetDia("incorrecto")
 
 	if lunes != nil {
@@ -238,7 +238,7 @@ func TestNewHorarioFromClases(t *testing.T) {
 		},
 	}
 
-	horario := NewHorarioFromClases(clases)
+	horario := newHorarioFromClases(clases)
 
 	if len(horario.Clases[DiaSemana.Lunes]) != 2 {
 		t.Errorf("Número incorrecto de clases el lunes: se esperaba %d, se obtuvo %d", 2, len(horario.Clases[DiaSemana.Lunes]))
