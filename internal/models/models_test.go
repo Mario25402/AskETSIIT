@@ -230,7 +230,7 @@ func TestExtraerProfesor(t *testing.T) {
 
 	clase, _ := NewClase(DiaSemana.Lunes, &Periodo{HoraInicio: HoraMinutos{Hora: 10, Minutos: EnPunto}, HoraFin: HoraMinutos{Hora: 12, Minutos: EnPunto}}, "23", *NewGrupo("4", "Sistemas Operativos", ""))
 
-	clase, err := extraerProfesor(tmpFile, clase)
+	err := extraerProfesor(clase, tmpFile)
 	if err != nil {
 		t.Fatalf("Error inesperado al extraer profesor: %v", err)
 	}
@@ -255,7 +255,7 @@ func TestExtraerProfesorSinGrupo(t *testing.T) {
 
 	clase, _ := NewClase(DiaSemana.Lunes, &Periodo{HoraInicio: HoraMinutos{Hora: 10, Minutos: EnPunto}, HoraFin: HoraMinutos{Hora: 12, Minutos: EnPunto}}, "23", *NewGrupo("", "Sistemas Operativos", ""))
 
-	_, err := extraerProfesor(tmpFile, clase)
+	err := extraerProfesor(clase, tmpFile)
 	if err == nil {
 		t.Errorf("Se esperaba un error al extraer profesor, pero no se produjo ninguno")
 	}
@@ -275,7 +275,7 @@ func TestExtraerClasesErrorSintaxis(t *testing.T) {
 
 	clase, _ := NewClase(DiaSemana.Lunes, &Periodo{HoraInicio: HoraMinutos{Hora: 10, Minutos: EnPunto}, HoraFin: HoraMinutos{Hora: 12, Minutos: EnPunto}}, "23", *NewGrupo("4", "Sistemas Operativos", ""))
 
-	_, err := extraerProfesor(tmpFile, clase)
+	err := extraerProfesor(clase, tmpFile)
 	if err == nil {
 		t.Errorf("Se esperaba un error al extraer profesor del fichero malformado, pero no se produjo ninguno")
 	}
@@ -367,8 +367,8 @@ func TestExtraerHorarioFromFile(t *testing.T) {
 	defer os.Remove(tmpFile)
 
 	horario := NewHorarioFromFile(tmpFile)
-	if len(horario.Clases[DiaSemana.Lunes]) != 1 {
-		t.Errorf("Número incorrecto de clases: se esperaba %d, se obtuvo %d", 1, len(horario.Clases[DiaSemana.Lunes]))
+	if len(horario.Clases["1"]) != 1 {
+		t.Errorf("Número incorrecto de clases: se esperaba %d, se obtuvo %d", 1, len(horario.Clases["1"]))
 	}
 }
 
