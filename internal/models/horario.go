@@ -19,7 +19,16 @@ func (horario Horario) GetClase(dia DiaSemana.DiaSemana, hora string) *Clase {
 		return nil
 	}
 
-	return horario.Clases[dia][*time]
+	clases := horario.GetDia(dia)
+	return clases[*time]
+}
+
+func (horario Horario) GetDia(dia DiaSemana.DiaSemana) map[HoraMinutos]*Clase {
+	if dia < DiaSemana.Lunes || dia > DiaSemana.Viernes {
+		return nil
+	}
+
+	return horario.Clases[dia]
 }
 
 func comprobarAdicionClase(clases *[]Clase, asignatura, grupo, aula *string, dia *DiaSemana.DiaSemana, periodo *Periodo) {

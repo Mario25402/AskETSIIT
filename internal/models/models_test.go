@@ -82,9 +82,35 @@ func TestGetClase(t *testing.T) {
 	if lunes == nil {
 		t.Fatalf("No se encontró la clase esperada")
 	}
-	if *lunes != clases[0] {
-		t.Errorf("Clase incorrecta: se esperaba %+v, se obtuvo %+v", clases[0], *lunes)
+
+	if lunes.DiaSemana != DiaSemana.Lunes {
+		t.Errorf("Día incorrecto: se esperaba %v, se obtuvo %v", DiaSemana.Lunes, lunes.DiaSemana)
 	}
+
+	if lunes.Periodo.HoraInicio != (HoraMinutos{Hora: 8, Minutos: YMedia}) {
+		t.Errorf("Hora de inicio incorrecta: se esperaba %v, se obtuvo %v", HoraMinutos{Hora: 8, Minutos: YMedia}, lunes.Periodo.HoraInicio)
+	}
+
+	if lunes.Periodo.HoraFin != (HoraMinutos{Hora: 10, Minutos: YMedia}) {
+		t.Errorf("Hora de fin incorrecta: se esperaba %v, se obtuvo %v", HoraMinutos{Hora: 10, Minutos: YMedia}, lunes.Periodo.HoraFin)
+	}
+
+	if lunes.Aula != "1" {
+		t.Errorf("Aula incorrecta: se esperaba %q, se obtuvo %q", "1", lunes.Aula)
+	}
+
+	if lunes.Grupo.Nombre != "A" {
+		t.Errorf("Nombre del grupo incorrecto: se esperaba %q, se obtuvo %q", "A", lunes.Grupo.Nombre)
+	}
+
+	if lunes.Grupo.Asignatura != "Matemáticas" {
+		t.Errorf("Nombre del grupo incorrecto: se esperaba %q, se obtuvo %q", "Matemáticas", lunes.Grupo.Asignatura)
+	}
+
+	if lunes.Grupo.Profesor != "Juan Pérez" {
+		t.Errorf("Profesor incorrecto: se esperaba %q, se obtuvo %q", "Juan Pérez", lunes.Grupo.Profesor)
+	}
+
 }
 
 func TestGetClaseError(t *testing.T) {
@@ -105,6 +131,57 @@ func TestGetClaseError(t *testing.T) {
 
 	if lunes != nil {
 		t.Errorf("Se esperaba nil, pero se obtuvo %+v", *lunes)
+	}
+}
+
+func TestGetDia(t *testing.T) {
+	clases := []Clase{
+		{
+			DiaSemana: DiaSemana.Lunes,
+			Periodo: &Periodo{
+				HoraInicio: HoraMinutos{Hora: 8, Minutos: YMedia},
+				HoraFin:    HoraMinutos{Hora: 10, Minutos: YMedia},
+			},
+			Aula:  "1",
+			Grupo: *NewGrupo("A", "Matemáticas", "Juan Pérez"),
+		},
+		{
+			DiaSemana: DiaSemana.Lunes,
+			Periodo: &Periodo{
+				HoraInicio: HoraMinutos{Hora: 10, Minutos: YMedia},
+				HoraFin:    HoraMinutos{Hora: 12, Minutos: YMedia},
+			},
+			Aula:  "1",
+			Grupo: *NewGrupo("A", "Física", "Ana López"),
+		},
+	}
+
+	horario := NewHorarioFromClases(clases)
+	lunes := horario.GetDia("Lunes")
+
+	if len(lunes) != 2 {
+		t.Errorf("Número incorrecto de clases: se esperaba 2, se obtuvo %d", len(lunes))
+	}
+}
+
+func TestGetDiaError(t *testing.T) {
+	clases := []Clase{
+		{
+			DiaSemana: DiaSemana.Lunes,
+			Periodo: &Periodo{
+				HoraInicio: HoraMinutos{Hora: 8, Minutos: YMedia},
+				HoraFin:    HoraMinutos{Hora: 10, Minutos: YMedia},
+			},
+			Aula:  "1",
+			Grupo: *NewGrupo("A", "Matemáticas", "Juan Pérez"),
+		},
+	}
+
+	horario := NewHorarioFromClases(clases)
+	lunes := horario.GetDia("incorrecto")
+
+	if lunes != nil {
+		t.Errorf("Se esperaba nil, pero se obtuvo %+v", lunes)
 	}
 }
 
