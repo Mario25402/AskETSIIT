@@ -193,7 +193,7 @@ func extraerProfesor(clase *Clase, fileName string) error {
 	return nil
 }
 
-func NewHorarioFromClases(clases []Clase) Horario {
+func newHorarioFromClases(clases []Clase) Horario {
 	horario := Horario{Clases: make(map[DiaSemana.DiaSemana]map[HoraMinutos]*Clase)}
 
 	for _, clase := range clases {
@@ -225,6 +225,6 @@ func NewHorarioFromFile(file string) *Horario {
 		(*clases)[iteracion] = clase
 	}
 
-	horario := NewHorarioFromClases(*clases)
+	horario := newHorarioFromClases(*clases)
 	return &horario
 }
