@@ -7,4 +7,5 @@ automatizar:
   fichero: makefile
   orden: make
   
-test: ./internal/...
+test: 
+  - internal/models/models_test.go
