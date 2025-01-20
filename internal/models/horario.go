@@ -103,69 +103,68 @@ func extraerClases(fileName string) (*[]Clase, error) {
 	}
 }
 
-func establecerProfesor(clase *Clase, prof, cadena string) *Clase {
-	var grupos []string
+func establecerProfesor(clase *Clase, prof, cadena *string) {
+	if clase != nil && prof != nil && cadena != nil {
+		var grupos []string
 
-	cadena = strings.ReplaceAll(cadena, " y ", ",")
-	grupos = append(grupos, strings.Split(cadena, ",")...)
+		*cadena = strings.ReplaceAll(*cadena, " y ", ",")
+		grupos = append(grupos, strings.Split(*cadena, ",")...)
 
-	for _, grupo := range grupos {
-		if strings.TrimSpace(grupo) == clase.Grupo.Nombre {
-			clase.Grupo.setProfesor(prof)
-			return clase
+		for _, grupo := range grupos {
+			if strings.TrimSpace(grupo) == clase.Grupo.Nombre {
+				clase.Grupo.setProfesor(*prof)
+				break
+			}
 		}
 	}
-
-	return nil
 }
 
-func procesadorProfesor(clase *Clase, prof *string) map[*regexp.Regexp]func([]string) *Clase {
+func procesadorProfesor(prof *string) map[*regexp.Regexp]func([]string) (clase *Clase, profesor, cadena *string) {
 	var leer bool
 
-	return map[*regexp.Regexp]func([]string) *Clase{
-		regexp.MustCompile(`<a href=\"https://www.ugr.es/personal/[^>]*\">([^<]+)</a>`): func(matches []string) *Clase {
+	return map[*regexp.Regexp]func([]string) (clase *Clase, profesor, cadena *string){
+		regexp.MustCompile(`<a href=\"https://www.ugr.es/personal/[^>]*\">([^<]+)</a>`): func(matches []string) (clase *Clase, profesor, cadena *string) {
 			*prof = strings.TrimSpace(matches[1])
-			return nil
+			return nil, nil, nil
 		},
-		regexp.MustCompile(`Grupos?&nbsp;`): func(matches []string) *Clase {
+
+		regexp.MustCompile(`Grupos?&nbsp;`): func(matches []string) (clase *Clase, profesor, cadena *string) {
 			leer = true
-			return nil
+			return nil, nil, nil
 		},
-		regexp.MustCompile(`([A-Z]|\d{1,2})(,\s*([A-Z]|\d{1,2}))*\s*(y\s*([A-Z]|\d{1,2}))?$`): func(matches []string) *Clase {
+
+		regexp.MustCompile(`([A-Z]|\d{1,2})(,\s*([A-Z]|\d{1,2}))*\s*(y\s*([A-Z]|\d{1,2}))?$`): func(matches []string) (clase *Clase, profesor, cadena *string) {
 			if leer {
 				leer = false
-				return establecerProfesor(clase, *prof, matches[0])
+				return clase, prof, &matches[0]
 			}
 
-			return nil
+			return nil, nil, nil
 		},
 	}
 }
 
-func extraerProfesor(fileName string, clase *Clase) (*Clase, error) {
+func extraerProfesor(clase *Clase, fileName string) error {
 	var prof string
 	file, _ := os.Open(fileName)
 	defer file.Close()
 
-	procesador := procesadorProfesor(clase, &prof)
+	procesador := procesadorProfesor(&prof)
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		linea := scanner.Text()
 
-		for exp, proc := range procesador {
-			if matches := exp.FindStringSubmatch(linea); matches != nil {
-				clase := proc(matches)
-				if clase != nil {
-					return clase, nil
-				}
-
+		for expReg, procesado := range procesador {
+			if matches := expReg.FindStringSubmatch(linea); matches != nil {
+				clase, prof, match := procesado(matches)
+				establecerProfesor(clase, prof, match)
 				break
 			}
 		}
 	}
 
-	return nil, errors.New("no se ha encontrado profesor para el grupo buscado")
+	return errors.New("no se ha encontrado profesor")
 }
 
 func NewHorarioFromClases(clases []Clase) Horario {
@@ -192,12 +191,13 @@ func NewHorarioFromFile(file string) *Horario {
 	}
 
 	for i, clase := range *clases {
-		clasePtr, err := extraerProfesor(file, &clase)
+		var _ *Clase = &clase
+		err := extraerProfesor(&clase, file)
 		if err != nil {
 			return nil
 		}
 
-		(*clases)[i] = *clasePtr
+		(*clases)[i] = clase
 	}
 
 	horario := NewHorarioFromClases(*clases)
