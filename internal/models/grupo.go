@@ -5,7 +5,3 @@ type Grupo struct {
 	Asignatura string
 	Profesor   string
 }
-
-func (grupo *Grupo) setProfesor(prof string) {
-	grupo.Profesor = prof
-}

@@ -131,7 +131,7 @@ func establecerProfesor(clase *Clase, profesor *string, grupos []string) {
 	if clase != nil && profesor != nil && grupos != nil {
 		for _, grupo := range grupos {
 			if grupo == clase.Grupo.Nombre {
-				clase.Grupo.setProfesor(*profesor)
+				clase.Grupo.Profesor = *profesor
 				*profesor = ""
 				break
 			}
