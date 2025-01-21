@@ -6,37 +6,37 @@
 - **Tamaño**: Por norma general una imagen pequeña estará más enfocada y será más eficiente que una de mayor tamaño.
     - Se priorizarán imágenes con menor tamaño final.
 
-- **Insignias**: En DockerHub exiten unas insignias llamadas "Trusted Content" que indican si la imagen es *Oficial*, si es de un *Creador Verificado* o si es de *Código Abierto*. La concesión de alguna de estas insignias indican contenido de calidad por lo que:
-    - Se seleccionarán imágenes con insignias.
+- **Insignias**: En DockerHub exiten unas insignias llamadas ["Trusted Content"](https://docs.docker.com/docker-hub/image-library/trusted-content/) que indican si la imagen es *Oficial*, si es de un *Creador Verificado* o si es de *Código Abierto*. La concesión de alguna de estas insignias indican contenido de calidad por lo que:
+    - Se seleccionarán imágenes con insignias Oficiales y de Desarrolladores Verificados.
 
 ## Opciones
 ### **[Golang](https://hub.docker.com/_/golang)**
 Su versión BookWorm basada en Debian 12, cuenta con 58 vulnerabilidades registradas. La versión BullsEye no se escogió debido que esta basada en Debian 11 por lo que es preferible usar una versión más reciente.
 - Última actualización hace horas.
-- Desarrollador oficial.
+- Insignia de desarrollador **oficial**.
 
 ### **[Golang](https://hub.docker.com/_/golang)**
 Su versión Alpine basada en Linux.
 - Última actualización hace días.
-- Desarrollador oficial.
+- Insignia de desarrollador **oficial**.
 
 ### **[Bitnami](https://hub.docker.com/r/bitnami/golang)**
 - Última actualización hace días.
-- Desarrollador verificado.
+- Insignia de desarrollador **verificado**.
 
 ### **[Debian](https://hub.docker.com/_/debian)**
 Versión "latest".
 - Última actualización hace días.
-- Desarrollador oficial.
+- Insignia de desarrollador **oficial**.
 
 ### **[Debian](https://hub.docker.com/_/debian)**
 Versión "Stable-Slim".
 - Última actualización hace días.
-- Desarrollador oficial.
+- Insignia de desarrollador **oficial**.
 
 ### **[Alpine](https://hub.docker.com/_/alpine)**
 - Última actualización hace días.
-- Desarrollador oficial.
+- Insignia de desarrollador **oficial**.
 
 ## Conclusión
 
