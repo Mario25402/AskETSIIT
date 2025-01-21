@@ -31,24 +31,6 @@ func (horario Horario) GetDia(dia DiaSemana.DiaSemana) map[HoraMinutos]*Clase {
 	return horario.Clases[dia]
 }
 
-func addClase(clases *[]Clase, asignatura, grupo, aula *string, dia *DiaSemana.DiaSemana, periodo *Periodo) {
-	if *asignatura != "" && *dia != "" && *grupo != "" && *aula != "" && periodo != nil {
-		clase := Clase{
-			DiaSemana: *dia,
-			Periodo:   periodo,
-			Aula:      *aula,
-			Grupo:     Grupo{Nombre: *grupo, Asignatura: *asignatura, Profesor: ""},
-		}
-
-		*clases = append(*clases, clase)
-
-		*dia = ""
-		*aula = ""
-		*grupo = ""
-		periodo = nil
-	}
-}
-
 func procesarAsignatura(linea string, asignatura *string) {
 	expAsignatura := regexp.MustCompile(`<h1 class=\"page-title\">([^<]+)</h1>`)
 
@@ -117,7 +99,17 @@ func extraerClases(fileName string) (*[]Clase, error) {
 		procesarPeriodo(linea, &periodo)
 		procesarAsignatura(linea, &asignatura)
 
-		addClase(&clases, &asignatura, &grupo, &aula, &dia, periodo)
+		clase, err := NewClase(dia, periodo, aula, Grupo{Nombre: grupo, Asignatura: asignatura, Profesor: ""})
+
+		if err == nil {
+			clases = append(clases, *clase)
+
+			dia = ""
+			aula = ""
+			grupo = ""
+			asignatura = ""
+			periodo = nil
+		}
 	}
 
 	if len(clases) == 0 {
