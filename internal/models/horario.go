@@ -127,14 +127,10 @@ func extraerClases(fileName string) (*[]Clase, error) {
 	return &clases, nil
 }
 
-func establecerProfesor(clase *Clase, profesor, cadena *string) {
-	if clase != nil && profesor != nil && cadena != nil {
-		var grupos []string
-
-		grupos = append(grupos, strings.Split(*cadena, ",")...)
-
+func establecerProfesor(clase *Clase, profesor *string, grupos []string) {
+	if clase != nil && profesor != nil && grupos != nil {
 		for _, grupo := range grupos {
-			if strings.TrimSpace(grupo) == clase.Grupo.Nombre {
+			if grupo == clase.Grupo.Nombre {
 				clase.Grupo.setProfesor(*profesor)
 				*profesor = ""
 				break
@@ -143,7 +139,7 @@ func establecerProfesor(clase *Clase, profesor, cadena *string) {
 	}
 }
 
-func procesadorProfesor(linea string, profesor *string, leer *bool) *string {
+func procesadorProfesor(linea string, profesor *string, leer *bool) []string {
 	expNombre := regexp.MustCompile(`<a href=\"https://www.ugr.es/personal/[^>]*\">([^<]+)</a>`)
 
 	if matches := expNombre.FindStringSubmatch(linea); matches != nil {
@@ -162,8 +158,12 @@ func procesadorProfesor(linea string, profesor *string, leer *bool) *string {
 
 		if matches := expGrupos.FindStringSubmatch(linea); matches != nil {
 			*leer = false
-			result := strings.ReplaceAll(matches[0], " y ", ",")
-			return &result
+
+			cadena := strings.TrimSpace(matches[0])
+			grupos := strings.ReplaceAll(cadena, " y ", ",")
+
+			var listaGrupos []string
+			return append(listaGrupos, strings.Split(grupos, ",")...)
 		}
 	}
 
