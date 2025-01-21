@@ -31,7 +31,7 @@ func (horario Horario) GetDia(dia DiaSemana.DiaSemana) map[HoraMinutos]*Clase {
 	return horario.Clases[dia]
 }
 
-func comprobarAdicionClase(clases *[]Clase, asignatura, grupo, aula *string, dia *DiaSemana.DiaSemana, periodo *Periodo) {
+func addClase(clases *[]Clase, asignatura, grupo, aula *string, dia *DiaSemana.DiaSemana, periodo *Periodo) {
 	if *asignatura != "" && *dia != "" && *grupo != "" && *aula != "" && periodo != nil {
 		clase := Clase{
 			DiaSemana: *dia,
@@ -117,7 +117,7 @@ func extraerClases(fileName string) (*[]Clase, error) {
 		procesarPeriodo(linea, &periodo)
 		procesarAsignatura(linea, &asignatura)
 
-		comprobarAdicionClase(&clases, &asignatura, &grupo, &aula, &dia, periodo)
+		addClase(&clases, &asignatura, &grupo, &aula, &dia, periodo)
 	}
 
 	if len(clases) == 0 {
