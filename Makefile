@@ -5,3 +5,7 @@ check:
 install:
 	@echo "Running dependencies installation"
 	go mod tidy
+
+test:
+	@echo "Running tests"
+	go test -v ./internal/... -cover

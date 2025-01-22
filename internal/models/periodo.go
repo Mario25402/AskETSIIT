@@ -2,6 +2,8 @@ package models
 
 import (
 	"errors"
+	"strconv"
+	"strings"
 )
 
 type MinutosPosibles string
@@ -11,16 +13,43 @@ const (
 	YMedia  MinutosPosibles = "Y Media"
 )
 
+const (
+	HoraInicioDia = 0
+	HoraFinDia    = 23
+)
+
 type HoraMinutos struct {
 	Hora    int // 0-23
 	Minutos MinutosPosibles
 }
 
-func NewHoraMinutos(hora int, minutos MinutosPosibles) (*HoraMinutos, error) {
-	if hora < 0 || hora > 23 {
+func newHoraMinutos(tiempo string) (*HoraMinutos, error) {
+	partes := strings.Split(tiempo, ":")
+
+	if len(partes) != 2 {
+		return nil, errors.New("la hora debe tener el formato HH:MM")
+	}
+
+	horas, err := strconv.Atoi(partes[0])
+	if err != nil {
+		return nil, err
+	}
+
+	if horas < HoraInicioDia || horas > HoraFinDia {
 		return nil, errors.New("la hora debe estar entre 0 y 23")
 	}
-	return &HoraMinutos{Hora: hora, Minutos: minutos}, nil
+
+	var minutos MinutosPosibles
+
+	if partes[1] == "00" {
+		minutos = EnPunto
+	} else if partes[1] == "30" {
+		minutos = YMedia
+	} else {
+		return nil, errors.New("los minutos deben ser 00 o 30")
+	}
+
+	return &HoraMinutos{Hora: horas, Minutos: minutos}, nil
 }
 
 type Periodo struct {
@@ -28,16 +57,20 @@ type Periodo struct {
 	HoraFin    HoraMinutos
 }
 
-func NewPeriodo(horaInicio, horaFin HoraMinutos) (*Periodo, error) {
-	// Verificar que la hora de inicio es anterior a la hora de fin
-	if horaInicio.Hora > horaFin.Hora || (horaInicio.Hora == horaFin.Hora && horaInicio.Minutos > horaFin.Minutos) {
-		return nil, errors.New("la hora de inicio debe ser anterior a la hora de fin")
-	}
-	// Crear y devolver el Periodo si todo es válido
-	periodo := &Periodo{
-		HoraInicio: horaInicio,
-		HoraFin:    horaFin,
+func newPeriodo(tiempoInicio, tiempoFinal string) (*Periodo, error) {
+	ini, err := newHoraMinutos(tiempoInicio)
+	if err != nil {
+		return nil, err
 	}
 
-	return periodo, nil
+	fin, err := newHoraMinutos(tiempoFinal)
+	if err != nil {
+		return nil, err
+	}
+
+	if ini.Hora > fin.Hora || (ini.Hora == fin.Hora && ini.Minutos > fin.Minutos) {
+		return nil, errors.New("la hora de inicio debe ser anterior a la hora de fin")
+	}
+
+	return &Periodo{HoraInicio: *ini, HoraFin: *fin}, nil
 }
