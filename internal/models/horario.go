@@ -31,24 +31,6 @@ func (horario Horario) GetDia(dia DiaSemana.DiaSemana) map[HoraMinutos]*Clase {
 	return horario.Clases[dia]
 }
 
-func comprobarAdicionClase(clases *[]Clase, asignatura, grupo, aula *string, dia *DiaSemana.DiaSemana, periodo *Periodo) {
-	if *asignatura != "" && *dia != "" && *grupo != "" && *aula != "" && periodo != nil {
-		clase := Clase{
-			DiaSemana: *dia,
-			Periodo:   periodo,
-			Aula:      *aula,
-			Grupo:     Grupo{Nombre: *grupo, Asignatura: *asignatura, Profesor: ""},
-		}
-
-		*clases = append(*clases, clase)
-
-		*dia = ""
-		*aula = ""
-		*grupo = ""
-		periodo = nil
-	}
-}
-
 func procesarAsignatura(linea string, asignatura *string) {
 	expAsignatura := regexp.MustCompile(`<h1 class=\"page-title\">([^<]+)</h1>`)
 
@@ -117,7 +99,17 @@ func extraerClases(fileName string) (*[]Clase, error) {
 		procesarPeriodo(linea, &periodo)
 		procesarAsignatura(linea, &asignatura)
 
-		comprobarAdicionClase(&clases, &asignatura, &grupo, &aula, &dia, periodo)
+		clase, err := NewClase(dia, periodo, aula, Grupo{Nombre: grupo, Asignatura: asignatura, Profesor: ""})
+
+		if err == nil {
+			clases = append(clases, *clase)
+
+			dia = ""
+			aula = ""
+			grupo = ""
+			asignatura = ""
+			periodo = nil
+		}
 	}
 
 	if len(clases) == 0 {
@@ -127,15 +119,11 @@ func extraerClases(fileName string) (*[]Clase, error) {
 	return &clases, nil
 }
 
-func establecerProfesor(clase *Clase, profesor, cadena *string) {
-	if clase != nil && profesor != nil && cadena != nil {
-		var grupos []string
-
-		grupos = append(grupos, strings.Split(*cadena, ",")...)
-
+func establecerProfesor(clase *Clase, profesor *string, grupos []string) {
+	if clase != nil && profesor != nil && grupos != nil {
 		for _, grupo := range grupos {
-			if strings.TrimSpace(grupo) == clase.Grupo.Nombre {
-				clase.Grupo.setProfesor(*profesor)
+			if grupo == clase.Grupo.Nombre {
+				clase.Grupo.Profesor = *profesor
 				*profesor = ""
 				break
 			}
@@ -143,7 +131,7 @@ func establecerProfesor(clase *Clase, profesor, cadena *string) {
 	}
 }
 
-func procesadorProfesor(linea string, profesor *string, leer *bool) *string {
+func procesadorProfesor(linea string, profesor *string, leer *bool) []string {
 	expNombre := regexp.MustCompile(`<a href=\"https://www.ugr.es/personal/[^>]*\">([^<]+)</a>`)
 
 	if matches := expNombre.FindStringSubmatch(linea); matches != nil {
@@ -162,8 +150,12 @@ func procesadorProfesor(linea string, profesor *string, leer *bool) *string {
 
 		if matches := expGrupos.FindStringSubmatch(linea); matches != nil {
 			*leer = false
-			result := strings.ReplaceAll(matches[0], " y ", ",")
-			return &result
+
+			cadena := strings.TrimSpace(matches[0])
+			grupos := strings.ReplaceAll(cadena, " y ", ",")
+
+			var listaGrupos []string
+			return append(listaGrupos, strings.Split(grupos, ",")...)
 		}
 	}
 

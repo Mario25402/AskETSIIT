@@ -184,8 +184,8 @@ func TestExtraerProfesor(t *testing.T) {
 		t.Fatalf("Error inesperado al extraer profesor: %v", err)
 	}
 
-	if clase.Grupo.Profesor != "Pedro Martín Cuevas" {
-		t.Errorf("Profesor incorrecto: se esperaba %q, se obtuvo %q", "Pedro Martín Cuevas", clase.Grupo.Profesor)
+	if clase.Grupo.Profesor != "Sofía García Pascual" {
+		t.Errorf("Profesor incorrecto: se esperaba %q, se obtuvo %q", "Sofía García Pascual", clase.Grupo.Profesor)
 	}
 }
 
