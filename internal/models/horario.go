@@ -1,5 +1,4 @@
 package models
-
 import (
 	DiaSemana "askETSIIT/internal/diasemana"
 	"bufio"
