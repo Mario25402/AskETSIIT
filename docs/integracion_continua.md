@@ -33,6 +33,6 @@ Teniendo en cuenta que todas son compatibles con la ejecución de imágenes de D
 Para el otro sistema vamos a escoger `Circle CI` simplemente porque nos permite más tiempo de ejecución que las opciones restantes.
 
 ## Versiones de testeo
-Para *GitHub Actions*, vamos a seguir utilizando la última versión del lenguaje que es la que ejecuta la [imagen](https://hub.docker.com/repository/docker/mario25402/asketsiit/general) subida a *Docker Hub*.
+Para *Circle CI*, vamos a seguir utilizando la última versión del lenguaje que es la que ejecuta la [imagen](https://hub.docker.com/repository/docker/mario25402/asketsiit/general) subida a *Docker Hub*.
 
-En `Circle CI` estaremos probando la versión 1.20 por que es la versión más antigua aún mantenida.
+En *GitHub Actions* estaremos probando la versión **1.12** ya que tras probar diferentes versión buscando que todos los paquetes funcionasen, no podemos usar versiones anteriores a 1.11 ya que la gestión de dependencias no se hacía a traves de módulos sino a través del **GOPATH**. La 1.11 tampoco se usa porque la biblioteca "strings" no contenía una función usada en el proyecto. La versión 1.12 es la mejor que podemos usar y que todo se ejecute correctamente.
