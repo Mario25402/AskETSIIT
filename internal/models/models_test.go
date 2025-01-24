@@ -245,7 +245,7 @@ func TestNewHorarioFromClases(t *testing.T) {
 	}
 }
 
-func TestExtraerHorarioFromFile(t *testing.T) {
+func TestExtraerHorarioFromFileCorrecto(t *testing.T) {
 	horario := NewHorarioFromFile("../../docs/fuentes/correcto.html")
 
 	if len(horario.Clases["1"]) != 1 {
