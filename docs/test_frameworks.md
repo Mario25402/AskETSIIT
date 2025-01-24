@@ -2,8 +2,7 @@
 ## Criterios de aceptación
  - Mantenimiento y actualización del paquete, que cumpla este requisito es importante debido a que si una herramienta no se corrige o no se actualiza conforme se renuevan versiones del lenguaje, puede quedar obsoleta o que parte de código antiguo deje de funcionar.
     - Se valorará que haya commits recientes y que solucionen issues o pull requests abiertos por la comunidad.
-
-- La herramienta no añade dependencias externas. Que un programa funcione en base a una dependencia no es muy buena práctica ya que ésta requiere de mantenimiento y actualizaciones, lo que aumentaría la deuda técnica si no se cumple. De la misma manera si se usa una pequeña funcionalidad de una herramienta muy pesada, estamos perdiendo espacio y capacidad de exportarla a un contenedor con espacio limitado.
+- La herramienta no añade dependencias externas. Que un programa funcione en base a una dependencia no es muy buena práctica ya que ésta requiere de mantenimiento y actualizaciones, lo que aumentaría la deuda técnica si no se cumple. De la misma manera si se usa una pequeña funcionalidad de una herramienta muy pesada, estamos perdiendo espacio y capacidad de exportarla a un contenedor con espacio limitado. Este criterio es fundamental.
 
 ## Opciones
 ### 1. [Testing](https://pkg.go.dev/testing)
