@@ -6,7 +6,6 @@ jobs:
       - image: mario25402/asketsiit:latest
     steps:
       - checkout
-
       - run:
           name: Run tests
           command: make test
