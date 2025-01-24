@@ -1,0 +1,14 @@
+version: v1.0
+name: Go
+agent:
+  machine:
+    type: f1-standard-2
+    os_image: ubuntu2204
+blocks:
+  - name: AskETSIIT CI
+    task:
+      jobs:
+        - name: build_test
+          commands:
+            - make install
+            - make test
