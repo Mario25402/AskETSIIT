@@ -16,7 +16,7 @@
 - Repositorio con alrededor de 60 estrellas, sin [commits](https://github.com/go-check/check/commits/master/) desde hace varios años.
 
 ### 4. [Testing](https://pkg.go.dev/testing)
-- Testing es un paquete nativo de *Go* que engloba funcionalidades de testing, incluidas las de aserción y matching, útilies para este apartado.
+Testing es un paquete nativo de *Go* que engloba funcionalidades de testing. Incluye funciones para el reporte de errores con las que podemos programar tests de aserciones.
 - No contamos con información sobre el repositorio específico por la misma razón que el apartado anterior, viene includio por defecto.
 
 ## Conclusión
