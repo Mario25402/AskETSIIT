@@ -168,7 +168,7 @@ func TestExtraerClasesErrorDia(t *testing.T) {
 	}
 }
 
-func TestExtraerClasesErrorPeriodo(t *testing.T) {
+func TestExtraerClasesErrorHoras(t *testing.T) {
 	_, err := extraerClases("../../docs/fuentes/errorPeriodo.html")
 
 	if err == nil {
