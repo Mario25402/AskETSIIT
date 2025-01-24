@@ -12,4 +12,4 @@ blocks:
           commands:
             - checkout
             - docker pull mario25402/asketsiit:latest
-            - docker run -v -u 1001 `pwd`:/app/test -t mario25402/asketsiit:latest
+            - docker run -u 1001 -v `pwd`:/app/test -t mario25402/asketsiit:latest
