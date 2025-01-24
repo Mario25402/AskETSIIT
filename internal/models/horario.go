@@ -88,8 +88,8 @@ func extraerClases(fileName string) (*[]Clase, error) {
 
 	file, _ := os.Open(fileName)
 	defer file.Close()
-
 	scanner := bufio.NewScanner(file)
+
 	for scanner.Scan() {
 		linea := scanner.Text()
 
