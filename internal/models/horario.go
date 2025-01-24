@@ -1,4 +1,5 @@
 package models
+
 import (
 	DiaSemana "askETSIIT/internal/diasemana"
 	"bufio"
@@ -151,10 +152,8 @@ func procesadorProfesor(linea string, profesor *string, leer *bool) []string {
 			*leer = false
 
 			cadena := strings.TrimSpace(matches[0])
-			grupos := strings.ReplaceAll(cadena, " y ", ",")
-
-			var listaGrupos []string
-			return append(listaGrupos, strings.Split(grupos, ",")...)
+			grupos := regexp.MustCompile(`\s*(,|y)\s*`)
+			return grupos.Split(cadena, -1)
 		}
 	}
 
