@@ -1,3 +1,3 @@
 module askETSIIT
 
-go 1.17
+go 1.3
