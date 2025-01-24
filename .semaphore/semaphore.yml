@@ -10,5 +10,6 @@ blocks:
       jobs:
         - name: build_test
           commands:
-            - make install
-            - make test
+            - chekcout
+            - docker pull mario25402/asketsiit:latest
+            - docker run -v -u 1001 `pwd`:/app/test -t mario25402/asketsiit:latest
