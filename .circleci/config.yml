@@ -6,10 +6,6 @@ jobs:
       - image: mario25402/asketsiit:latest
     steps:
       - checkout
-      
-      - run:
-          name: Install dependencies
-          command: make install
 
       - run:
           name: Run tests
