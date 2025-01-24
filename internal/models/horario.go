@@ -88,9 +88,9 @@ func extraerClases(fileName string) (*[]Clase, error) {
 
 	file, _ := os.Open(fileName)
 	defer file.Close()
-	scanner := bufio.NewScanner(file)
 
-	for scanner.Scan() {
+	scanner := bufio.NewScanner(file)
+	for ok := scanner.Scan(); ok; ok = scanner.Scan() {
 		linea := scanner.Text()
 
 		procesarDia(linea, &dia)
