@@ -2,6 +2,9 @@ package models
 
 import (
 	DiaSemana "askETSIIT/internal/diasemana"
+	"bufio"
+	"errors"
+	"os"
 	"regexp"
 	"strings"
 )
@@ -81,4 +84,114 @@ func procesadorProfesor(linea string, profesor *string, leer *bool) []string {
 	}
 
 	return nil
+}
+
+func extraerClases(fileName string) (*[]Clase, error) {
+	var clases []Clase
+	var periodo *Periodo
+	var dia DiaSemana.DiaSemana
+	var aula, grupo, asignatura string
+
+	file, _ := os.Open(fileName)
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	for ok := scanner.Scan(); ok; ok = scanner.Scan() {
+		linea := scanner.Text()
+
+		procesarDia(linea, &dia)
+		procesarAula(linea, &aula)
+		procesarGrupo(linea, &grupo)
+		procesarPeriodo(linea, &periodo)
+		procesarAsignatura(linea, &asignatura)
+
+		clase, err := newClase(dia, periodo, aula, Grupo{Nombre: grupo, Asignatura: asignatura, Profesor: ""})
+
+		if err == nil {
+			clases = append(clases, *clase)
+
+			dia = ""
+			aula = ""
+			grupo = ""
+			asignatura = ""
+			periodo = nil
+		}
+	}
+
+	if len(clases) == 0 {
+		return nil, errors.New("no se han encontrado clases")
+	}
+
+	return &clases, nil
+}
+
+func establecerProfesor(clase *Clase, profesor *string, grupos []string) {
+	if clase != nil && profesor != nil && grupos != nil {
+		for _, grupo := range grupos {
+			if grupo == clase.Grupo.Nombre {
+				clase.Grupo.Profesor = *profesor
+				*profesor = ""
+				break
+			}
+		}
+	}
+}
+
+func extraerProfesor(clase *Clase, fileName string) {
+	var profesor string
+	var leer bool
+
+	file, _ := os.Open(fileName)
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		linea := scanner.Text()
+
+		if grupos := procesadorProfesor(linea, &profesor, &leer); grupos != nil {
+			establecerProfesor(clase, &profesor, grupos)
+		}
+	}
+}
+
+func newHorarioFromClases(clases []Clase) Horario {
+	horario := Horario{Clases: make(map[DiaSemana.DiaSemana]map[HoraMinutos]*Clase)}
+
+	for _, clase := range clases {
+		dia := clase.DiaSemana
+
+		if horario.Clases[dia] == nil {
+			horario.Clases[dia] = make(map[HoraMinutos]*Clase)
+		}
+
+		horaInicio := clase.Periodo.HoraInicio
+		horario.Clases[dia][horaInicio] = &clase
+	}
+
+	return horario
+}
+
+func NewHorarioFromFile(file string) *Horario {
+	clases, err := extraerClases(file)
+	if err != nil {
+		return nil
+	}
+
+	for iteracion, clase := range *clases {
+		extraerProfesor(&clase, file)
+		(*clases)[iteracion] = clase
+	}
+
+	horario := newHorarioFromClases(*clases)
+	return &horario
+}
+
+func (horario Horario) GetClase(dia DiaSemana.DiaSemana, hora string) *Clase {
+	time := newHoraMinutos(hora)
+	clases := horario.GetDia(dia)
+	return clases[*time]
+}
+
+func (horario Horario) GetDia(dia DiaSemana.DiaSemana) map[HoraMinutos]*Clase {
+	return horario.Clases[dia]
 }
