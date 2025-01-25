@@ -3,7 +3,6 @@ package models
 import (
 	DiaSemana "askETSIIT/internal/diasemana"
 	"bufio"
-	"errors"
 	"os"
 	"regexp"
 	"strings"
@@ -109,13 +108,8 @@ func extraerClases(fileName string) (*[]Clase, error) {
 			dia = ""
 			aula = ""
 			grupo = ""
-			asignatura = ""
 			periodo = nil
 		}
-	}
-
-	if len(clases) == 0 {
-		return nil, errors.New("no se han encontrado clases")
 	}
 
 	return &clases, nil
@@ -168,10 +162,7 @@ func newHorarioFromClases(clases []Clase) Horario {
 }
 
 func NewHorarioFromFile(file string) *Horario {
-	clases, err := extraerClases(file)
-	if err != nil {
-		return nil
-	}
+	clases, _ := extraerClases(file)
 
 	for iteracion, clase := range *clases {
 		extraerProfesor(&clase, file)
