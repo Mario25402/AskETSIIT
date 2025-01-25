@@ -25,16 +25,12 @@ func procesarDia(linea string, dia *DiaSemana.DiaSemana) {
 	expDia := regexp.MustCompile(`<div class=\"clase dia-(\d)\"`)
 
 	if matches := expDia.FindStringSubmatch(linea); matches != nil {
-		if "1" < matches[1] && matches[1] > "5" {
-			return
-		}
-
 		*dia = DiaSemana.DiaSemana(matches[1])
 	}
 }
 
 func procesarGrupo(linea string, grupo *string) {
-	expGrupo := regexp.MustCompile(`<div class=\"grupo\"><span>Grupo:</span>\s*([A-Za-z]|\d{1,2})</div>`)
+	expGrupo := regexp.MustCompile(`<div class=\"grupo\"><span>Grupo:</span>\s*([A-F]|[A-F][1-3]|\d{1,2})</div>`)
 
 	if matches := expGrupo.FindStringSubmatch(linea); matches != nil {
 		*grupo = matches[1]
@@ -42,7 +38,7 @@ func procesarGrupo(linea string, grupo *string) {
 }
 
 func procesarAula(linea string, aula *string) {
-	expAula := regexp.MustCompile(`<div>Aula:\s*(\d+)</div>`)
+	expAula := regexp.MustCompile(`<div>Aula:\s*(-?[A-Za-z0-9][A-Za-z0-9.][A-Za-z0-9])</div>`)
 
 	if matches := expAula.FindStringSubmatch(linea); matches != nil {
 		*aula = matches[1]
