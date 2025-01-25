@@ -185,3 +185,13 @@ func NewHorarioFromFile(file string) *Horario {
 	horario := newHorarioFromClases(*clases)
 	return &horario
 }
+
+func (horario Horario) GetClase(dia DiaSemana.DiaSemana, hora string) *Clase {
+	time := newHoraMinutos(hora)
+	clases := horario.GetDia(dia)
+	return clases[*time]
+}
+
+func (horario Horario) GetDia(dia DiaSemana.DiaSemana) map[HoraMinutos]*Clase {
+	return horario.Clases[dia]
+}
