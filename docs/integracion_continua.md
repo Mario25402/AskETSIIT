@@ -30,7 +30,7 @@
 ## Conclusión
 Teniendo en cuenta que todas son compatibles con la ejecución de imágenes de Docker y que además pueden ser utilizadas en GitHub, hay una que destaca por el hecho de estar incluida de forma nativa, lo que hace que nos evitemos procesos de configuración externos: las `GitHub Actions`.
 
-Para el otro sistema vamos a escoger `Circle CI` simplemente porque nos permite más tiempo de ejecución que las opciones restantes.
+Tras probarlos todos, para el otro sistema vamos a escoger `Circle CI` simplemente porque nos permite más tiempo de ejecución que las opciones restantes.
 
 ## Versiones de testeo
 Para *Circle CI*, vamos a seguir utilizando la última versión del lenguaje que es la que ejecuta la [imagen](https://hub.docker.com/repository/docker/mario25402/asketsiit/general) subida a *Docker Hub*.
