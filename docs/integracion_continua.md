@@ -20,7 +20,7 @@
 ### [Semaphore CI](https://semaphoreci.com/)
 - Permite la ejecución de contenedores Docker.
 - Compatible con GitHub mediante un archivo YAML.
-- Uso gratuiro de 1300 minutos al mes.
+- Uso gratuito de 1300 minutos al mes.
 
 ### [Travis CI](https://www.travis-ci.com/)
 - Permite la ejecución de contenedores Docker.
