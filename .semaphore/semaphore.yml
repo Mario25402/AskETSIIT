@@ -1,0 +1,15 @@
+version: v1.0
+name: Go
+agent:
+  machine:
+    type: f1-standard-2
+    os_image: ubuntu2204
+blocks:
+  - name: AskETSIIT CI
+    task:
+      jobs:
+        - name: build_test
+          commands:
+            - checkout
+            - docker pull mario25402/asketsiit:latest
+            - docker run -u 1001 -v `pwd`:/app/test -t mario25402/asketsiit:latest
