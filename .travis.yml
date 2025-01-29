@@ -1,8 +1,7 @@
-language: go
+language: minimal
 
 services:
   - docker
 
 script:
-  - docker pull mario25402/asketsiit:latest
   - docker run -u 1001 -v $(pwd):/app/test -t mario25402/asketsiit:latest
