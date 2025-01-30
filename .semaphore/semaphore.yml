@@ -1,14 +1,23 @@
 version: v1.0
-name: Go
+
+name: AskETSIIT CI 
 agent:
   machine:
     type: f1-standard-2
     os_image: ubuntu2204
+
 blocks:
   - name: AskETSIIT CI
     task:
+      prologue:
+        commands:
+          - GO_VERSION=$(curl -Ls https://go.dev/VERSION?m=text | head -n 1)
+          - wget https://go.dev/dl/${GO_VERSION}.linux-amd64.tar.gz
+          - sudo tar -C /usr/local -xzf ${GO_VERSION}.linux-amd64.tar.gz
+          - rm ${GO_VERSION}.linux-amd64.tar.gz
+          - checkout
+
       jobs:
-        - name: build_test
+        - name: Run tests
           commands:
-            - checkout
-            - docker run -u 1001 -v `pwd`:/app/test -t mario25402/asketsiit:latest
+            - make test
