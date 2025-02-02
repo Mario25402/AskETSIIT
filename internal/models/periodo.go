@@ -12,11 +12,6 @@ const (
 	YMedia  MinutosPosibles = "Y Media"
 )
 
-const (
-	HoraInicioDia = 0
-	HoraFinDia    = 23
-)
-
 type HoraMinutos struct {
 	Hora    int // 0-23
 	Minutos MinutosPosibles
