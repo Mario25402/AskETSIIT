@@ -1,0 +1,17 @@
+version: 2.1
+
+jobs:
+  docker_image:
+    docker:
+      - image: mario25402/asketsiit:latest
+    steps:
+      - checkout
+      - run:
+          name: Run tests
+          command: make test
+
+workflows:
+  build_test:
+    jobs:
+      - docker_image
+    

@@ -1,0 +1,7 @@
+language: minimal
+
+services:
+  - docker
+
+script:
+  - docker run -u 1001 -v $(pwd):/app/test -t mario25402/asketsiit:latest

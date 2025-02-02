@@ -61,6 +61,9 @@ docker build -t prueba .
 
 docker run -t -u 1001 -v `pwd`:/app/test prueba
 
+## Integración continua
+La elección de sistemas se valora en este [documento](docs/integracion_continua.md).
+
 ## Extra
 [Licencia](./LICENSE)
 [Configuración](./conf/pasos.txt)

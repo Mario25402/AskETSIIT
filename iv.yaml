@@ -9,3 +9,8 @@ automatizar:
   
 test: 
   - internal/models/models_test.go
+
+CI: 
+  - .github/workflows/ci.yml
+  - .circleci/config.yml
+  
